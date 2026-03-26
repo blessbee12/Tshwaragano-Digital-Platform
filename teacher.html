@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-100 to-gray-200">
+
+<!-- ================= LOGIN ================= -->
+<section id="loginPage" class="min-h-screen flex items-center justify-center">
+
+  <div class="bg-white/80 backdrop-blur-lg p-10 rounded-3xl shadow-xl w-full max-w-md">
+
+    <h2 class="text-3xl font-bold text-center mb-6">👩‍🏫 Teacher Portal</h2>
+
+    <input type="email" placeholder="Teacher Email"
+      class="w-full mb-3 p-3 border rounded-xl">
+
+    <input type="password" placeholder="Password"
+      class="w-full mb-5 p-3 border rounded-xl">
+
+    <button onclick="enterDashboard()"
+      class="w-full bg-black text-white py-3 rounded-xl font-semibold hover:scale-105 transition">
+      Login
+    </button>
+
+    <p class="text-center text-sm text-gray-500 mt-4">Demo Mode</p>
+
+  </div>
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+<section id="dashboardPage" class="hidden min-h-screen p-6">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold">📊 Teacher Dashboard</h1>
+
+    <button onclick="logout()"
+      class="bg-red-500 text-white px-5 py-2 rounded-xl">
+      Logout
+    </button>
+  </div>
+
+  <!-- Overview Cards -->
+  <div class="grid md:grid-cols-4 gap-6 mb-8">
+
+    <div class="bg-white p-5 rounded-2xl shadow">
+      <p class="text-gray-500">Students</p>
+      <h2 class="text-2xl font-bold">32</h2>
+    </div>
+
+    <div class="bg-white p-5 rounded-2xl shadow">
+      <p class="text-gray-500">Avg Score</p>
+      <h2 class="text-2xl font-bold">76%</h2>
+    </div>
+
+    <div class="bg-white p-5 rounded-2xl shadow">
+      <p class="text-gray-500">Attendance</p>
+      <h2 class="text-2xl font-bold">89%</h2>
+    </div>
+
+    <div class="bg-white p-5 rounded-2xl shadow">
+      <p class="text-gray-500">Alerts</p>
+      <h2 class="text-2xl font-bold text-red-500">5</h2>
+    </div>
+
+  </div>
+
+  <!-- Student Table -->
+  <div class="bg-white p-6 rounded-2xl shadow mb-8">
+    <h3 class="text-xl font-bold mb-4">📋 Student List</h3>
+
+    <table class="w-full text-left">
+      <thead>
+        <tr class="border-b">
+          <th>Name</th>
+          <th>Score</th>
+          <th>Attendance</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr class="border-b">
+          <td>Keabetswe</td>
+          <td>45%</td>
+          <td>70%</td>
+          <td class="text-red-500 font-bold">At Risk</td>
+        </tr>
+
+        <tr class="border-b">
+          <td>Thato</td>
+          <td>78%</td>
+          <td>90%</td>
+          <td class="text-green-500">Good</td>
+        </tr>
+
+        <tr>
+          <td>Kagiso</td>
+          <td>88%</td>
+          <td>95%</td>
+          <td class="text-green-500">Excellent</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Add Marks -->
+  <div class="bg-white p-6 rounded-2xl shadow mb-8 max-w-xl">
+    <h3 class="text-xl font-bold mb-4">➕ Update Student Record</h3>
+
+    <input placeholder="Student Name" class="w-full mb-2 p-2 border rounded">
+    <input placeholder="Score" class="w-full mb-2 p-2 border rounded">
+    <input placeholder="Attendance" class="w-full mb-3 p-2 border rounded">
+
+    <button class="bg-black text-white px-4 py-2 rounded">
+      Update
+    </button>
+  </div>
+
+  <!-- Chat -->
+  <div class="bg-white p-6 rounded-2xl shadow max-w-xl">
+    <h3 class="text-xl font-bold mb-4">💬 Parent Communication</h3>
+
+    <div class="space-y-2 mb-4">
+      <div class="bg-gray-200 p-2 rounded">
+        <strong>Parent:</strong> How is Keabetswe doing?
+      </div>
+
+      <div class="bg-black text-white p-2 rounded text-right">
+        Teacher: Improving slowly
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <input class="border p-2 w-full rounded-xl" placeholder="Reply...">
+      <button class="bg-black text-white px-4 rounded-xl">Send</button>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================= SCRIPT ================= -->
+<script>
+  function enterDashboard() {
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("dashboardPage").classList.remove("hidden");
+  }
+
+  function logout() {
+    document.getElementById("dashboardPage").classList.add("hidden");
+    document.getElementById("loginPage").classList.remove("hidden");
+  }
+</script>
+
+</body>
+</html>

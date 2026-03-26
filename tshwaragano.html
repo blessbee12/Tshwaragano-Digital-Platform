@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tshwaragano — Botswana Academic Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        earth:    '#2C1A0E',
+        clay:     '#8B4513',
+        kalahari: '#C4742A',
+        gold:     '#E8A93C',
+        sand:     '#F5DEB3',
+        cream:    '#FDF6EC',
+        sky:      '#1A3A5C',
+        river:    '#2E7D9A',
+        leaf:     '#2D6A4F',
+        accent:   '#D4580A',
+      },
+      fontFamily: {
+        display: ['"Playfair Display"','serif'],
+        body:    ['"DM Sans"','sans-serif'],
+        mono:    ['"DM Mono"','monospace'],
+      }
+    }
+  }
+}
+</script>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:'DM Sans',sans-serif;background:#FDF6EC;color:#2C1A0E;overflow-x:hidden}
+
+  .bg-pattern{
+    background-color:#FDF6EC;
+    background-image:
+      radial-gradient(circle at 15% 15%,rgba(196,116,42,.07) 0%,transparent 50%),
+      radial-gradient(circle at 85% 85%,rgba(44,26,14,.05) 0%,transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C4742A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes pulse-soft{0%,100%{opacity:1}50%{opacity:.6}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes dash{to{stroke-dashoffset:-40}}
+  @keyframes dot-bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-4px)}}
+  @keyframes ping{75%,100%{transform:scale(1.8);opacity:0}}
+
+  .animate-fade-up{animation:fadeUp .7s ease both}
+  .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
+  .pulse-soft{animation:pulse-soft 2.4s ease-in-out infinite}
+  .float-anim{animation:float 4s ease-in-out infinite}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .nav-link{transition:color .2s,background .2s;border-radius:8px}
+  .nav-link:hover{color:#C4742A;background:rgba(196,116,42,.1)}
+  .feature-card{transition:transform .25s,box-shadow .25s}
+  .feature-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(44,26,14,.13)}
+  .ug{position:relative;display:inline}
+  .ug::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:#E8A93C;border-radius:2px}
+  #mob-menu{display:none}
+  #mob-menu.open{display:flex}
+  .db-tab{cursor:pointer;transition:all .2s}
+  .db-tab.active{background:#2C1A0E;color:#FDF6EC}
+  .db-tab:not(.active):hover{background:rgba(255,255,255,.08)}
+  .db-panel{display:none}
+  .db-panel.active{display:block}
+  .conn-line{stroke-dasharray:6 4;animation:dash 2s linear infinite}
+  .dot1{animation:dot-bounce 1.2s infinite .0s}
+  .dot2{animation:dot-bounce 1.2s infinite .2s}
+  .dot3{animation:dot-bounce 1.2s infinite .4s}
+  .ping-anim{animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite}
+  .ring-progress{transform:rotate(-90deg);transform-origin:50% 50%}
+</style>
+</head>
+<body class="bg-pattern">
+
+<!-- NAV -->
+<nav class="fixed top-0 inset-x-0 z-50 bg-cream/90 backdrop-blur-xl border-b border-kalahari/20">
+  <div class="max-w-7xl mx-auto px-5 h-[68px] flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3">
+      <div class="w-9 h-9 bg-earth rounded-xl flex items-center justify-center text-gold font-bold">✦</div>
+      <span class="font-display text-[1.4rem] font-black text-earth tracking-tight">Tshwara<span class="text-kalahari">gano</span></span>
+    </a>
+    <ul class="hidden md:flex gap-1 items-center list-none m-0 p-0">
+      <li><a href="#features" class="nav-link px-4 py-2 text-sm font-medium text-earth">Features</a></li>
+      <li><a href="#connect"  class="nav-link px-4 py-2 text-sm font-medium text-earth">Connect</a></li>
+      <li><a href="#roles"    class="nav-link px-4 py-2 text-sm font-medium text-earth">Who It's For</a></li>
+      <li><a href="#conduct"  class="nav-link px-4 py-2 text-sm font-medium text-earth">Conduct</a></li>
+      <li><a href="#context"  class="nav-link px-4 py-2 text-sm font-medium text-earth">Context</a></li>
+      <li><a href="parent.html" class="nav-link px-4 py-2 text-sm font-medium text-earth">Parent Portal</a></li>
+      <li><a href="teacher.html" class="nav-link px-4 py-2 text-sm font-medium text-earth">Teacher Portal</a></li>
+      <li><a href="#register" class="ml-3 px-5 py-2 bg-earth text-cream text-sm font-semibold rounded-xl hover:bg-kalahari transition-colors">Get Started</a></li>
+      
+    </ul>
+    <button onclick="document.getElementById('mob-menu').classList.toggle('open')" class="md:hidden p-2 flex flex-col gap-1.5">
+      <span class="w-6 h-0.5 bg-earth rounded"></span>
+      <span class="w-6 h-0.5 bg-earth rounded"></span>
+      <span class="w-6 h-0.5 bg-earth rounded"></span>
+    </button>
+  </div>
+  <div id="mob-menu" class="md:hidden flex-col gap-1 px-5 pb-5 bg-cream/95">
+    <a href="#features" onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Features</a>
+    <a href="#connect"  onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Connect</a>
+    <a href="#roles"    onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Who It's For</a>
+    <a href="#conduct"  onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Conduct</a>
+    <a href="#context"  onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Context</a>
+    <a href="#register" onclick="document.getElementById('mob-menu').classList.remove('open')" class="block mt-2 px-5 py-2.5 bg-earth text-cream text-sm font-semibold rounded-xl text-center">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="relative pt-[72px] min-h-screen flex items-center">
+  <div class="max-w-7xl mx-auto px-5 py-16 w-full grid lg:grid-cols-2 gap-12 items-center">
+    <div class="animate-fade-up">
+      <div class="inline-flex items-center gap-2 bg-kalahari/10 border border-kalahari/30 text-clay text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">🇧🇼 Built for Botswana Schools</div>
+      <h1 class="font-display text-5xl xl:text-6xl font-black leading-[1.06] text-earth mb-5">
+        Every Child.<br>Every Teacher.<br><span class="ug text-kalahari">Every Parent.</span>
+      </h1>
+      <p class="text-[1.04rem] leading-[1.85] text-[#5A3A1A] mb-8 max-w-[440px]">
+        Tshwaragano — <em>togetherness</em> in Setswana — replaces missed messages and unseen report cards with one bilingual school platform that keeps everyone aligned, always.
+      </p>
+      <div class="flex flex-wrap gap-3 mb-10">
+        <a href="#register" class="px-7 py-3.5 bg-earth text-cream font-semibold rounded-xl hover:bg-kalahari transition-all hover:-translate-y-0.5 hover:shadow-xl">Register Your School</a>
+        <a href="#features" class="px-7 py-3.5 border-2 border-earth/20 text-earth font-medium rounded-xl hover:border-kalahari hover:text-kalahari transition-all">Explore Features</a>
+      </div>
+      <div class="flex gap-8 pt-7 border-t border-earth/10">
+        <div><div class="font-display text-3xl font-black text-earth">3</div><div class="text-xs text-[#7A5030] font-medium mt-0.5">User Roles</div></div>
+        <div><div class="font-display text-3xl font-black text-earth">6+</div><div class="text-xs text-[#7A5030] font-medium mt-0.5">Core Features</div></div>
+        <div><div class="font-display text-3xl font-black text-earth">2</div><div class="text-xs text-[#7A5030] font-medium mt-0.5">Languages</div></div>
+        <div><div class="font-display text-3xl font-black text-earth">∞</div><div class="text-xs text-[#7A5030] font-medium mt-0.5">Impact</div></div>
+      </div>
+    </div>
+
+    <!-- IMPROVED DASHBOARD MOCKUP -->
+    <div class="animate-fade-up delay-2 relative float-anim">
+      <div class="bg-[#1A0F07] rounded-[20px] p-[3px] shadow-[0_32px_80px_rgba(44,26,14,0.45)]">
+        <!-- Browser chrome -->
+        <div class="bg-[#120A04] rounded-t-[18px] px-4 py-2.5 flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500/70"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/70"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-green-400/70"></span>
+          <div class="flex-1 mx-3 bg-[#2C1A0E]/60 rounded-md px-3 py-1 flex items-center gap-2">
+            <span class="font-mono text-[10px] text-sand/40">app.tshwaragano.co.bw</span>
+          </div>
+          <div class="relative">
+            <span>🔔</span>
+            <span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full"><span class="ping-anim absolute inset-0 bg-red-400 rounded-full opacity-75"></span></span>
+          </div>
+        </div>
+        <!-- App shell -->
+        <div class="bg-[#1C0F06] rounded-b-[18px] flex overflow-hidden" style="height:430px">
+          <!-- Sidebar -->
+          <div class="w-[54px] bg-[#130904] flex flex-col items-center py-4 gap-3 flex-shrink-0 border-r border-white/5">
+            <div class="w-8 h-8 bg-kalahari rounded-lg flex items-center justify-center text-cream text-xs font-black">T</div>
+            <div class="w-full h-px bg-white/5 my-1"></div>
+            <button class="w-9 h-9 rounded-xl bg-kalahari/20 flex items-center justify-center text-gold text-base">📊</button>
+            <button class="w-9 h-9 rounded-xl flex items-center justify-center text-sand/30 text-base hover:bg-white/5 transition-colors">📚</button>
+            <button class="w-9 h-9 rounded-xl flex items-center justify-center text-sand/30 text-base hover:bg-white/5 transition-colors">💬</button>
+            <button class="w-9 h-9 rounded-xl flex items-center justify-center text-sand/30 text-base hover:bg-white/5 transition-colors">🧭</button>
+            <button class="w-9 h-9 rounded-xl flex items-center justify-center text-sand/30 text-base hover:bg-white/5 transition-colors">📅</button>
+            <div class="mt-auto"><div class="w-8 h-8 rounded-full bg-kalahari flex items-center justify-center text-cream text-xs font-bold">KM</div></div>
+          </div>
+          <!-- Main -->
+          <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <div class="flex items-center justify-between px-4 pt-3 pb-2.5 border-b border-white/5">
+              <div>
+                <div class="text-cream text-xs font-semibold">Good morning, Keabetswe 👋</div>
+                <div class="text-sand/40 text-[10px] font-mono">Term 2 · Week 7 of 13</div>
+              </div>
+              <div class="flex gap-1">
+                <button class="db-tab active text-[10px] font-semibold px-2.5 py-1 rounded-lg" onclick="switchTab(this,'overview')">Overview</button>
+                <button class="db-tab text-[10px] font-semibold px-2.5 py-1 rounded-lg text-sand/50" onclick="switchTab(this,'grades')">Grades</button>
+                <button class="db-tab text-[10px] font-semibold px-2.5 py-1 rounded-lg text-sand/50" onclick="switchTab(this,'conduct')">Conduct</button>
+              </div>
+            </div>
+            <!-- Overview panel -->
+            <div id="panel-overview" class="db-panel active flex-1 overflow-y-auto px-4 py-3 space-y-3">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="bg-earth/60 rounded-xl p-3">
+                  <div class="text-sand/50 text-[9px] uppercase tracking-wide mb-1">Overall Avg</div>
+                  <div class="text-gold font-display font-black text-2xl leading-none">83%</div>
+                  <div class="text-green-400 text-[9px] mt-1">▲ +4% this term</div>
+                </div>
+                <div class="bg-earth/60 rounded-xl p-3">
+                  <div class="text-sand/50 text-[9px] uppercase tracking-wide mb-1">Attendance</div>
+                  <div class="text-cream font-display font-black text-2xl leading-none">94%</div>
+                  <div class="text-sand/40 text-[9px] mt-1">47 of 50 days</div>
+                </div>
+                <div class="bg-earth/60 rounded-xl p-3">
+                  <div class="text-sand/50 text-[9px] uppercase tracking-wide mb-1">Conduct Pts</div>
+                  <div class="text-kalahari font-display font-black text-2xl leading-none">+18</div>
+                  <div class="text-sand/40 text-[9px] mt-1">Good standing</div>
+                </div>
+              </div>
+              <!-- Bar chart -->
+              <div class="bg-earth/40 rounded-xl p-3">
+                <div class="text-sand/50 text-[9px] uppercase tracking-wide mb-3">Subject Performance</div>
+                <div class="flex items-end gap-2" style="height:60px">
+                  <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-gold rounded-t-sm" style="height:84%"></div><div class="text-sand/40 text-[8px]">Math</div></div>
+                  <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-kalahari rounded-t-sm" style="height:91%"></div><div class="text-sand/40 text-[8px]">Eng</div></div>
+                  <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-kalahari/60 rounded-t-sm" style="height:76%"></div><div class="text-sand/40 text-[8px]">Sci</div></div>
+                  <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-gold/70 rounded-t-sm" style="height:88%"></div><div class="text-sand/40 text-[8px]">Hist</div></div>
+                  <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-kalahari/40 rounded-t-sm" style="height:68%"></div><div class="text-sand/40 text-[8px]">BRS</div></div>
+                  <div class="flex flex-col items-center gap-1 flex-1"><div class="w-full bg-gold/50 rounded-t-sm" style="height:82%"></div><div class="text-sand/40 text-[8px]">SetS</div></div>
+                </div>
+              </div>
+              <!-- Activity feed -->
+              <div class="space-y-1.5">
+                <div class="text-sand/40 text-[9px] uppercase tracking-wide">Recent Activity</div>
+                <div class="flex items-center gap-2 bg-green-900/30 border border-green-500/20 rounded-lg px-3 py-2">
+                  <span class="text-green-400 text-[10px]">●</span>
+                  <div class="flex-1"><div class="text-cream text-[10px] font-semibold">Excellent participation — Maths</div><div class="text-sand/40 text-[9px]">Mme Setshedi · Today 9am</div></div>
+                  <span class="font-mono text-[10px] text-green-400 font-bold">+5</span>
+                </div>
+                <div class="flex items-center gap-2 bg-amber-900/20 border border-amber-500/20 rounded-lg px-3 py-2">
+                  <span class="text-amber-400 text-[10px]">●</span>
+                  <div class="flex-1"><div class="text-cream text-[10px] font-semibold">Assignment due Friday — Science</div><div class="text-sand/40 text-[9px]">Rra Molefe · 2 days left</div></div>
+                  <span class="font-mono text-[10px] text-amber-400 font-bold">!</span>
+                </div>
+                <div class="flex items-center gap-2 bg-earth/50 rounded-lg px-3 py-2">
+                  <span class="text-kalahari text-[10px]">●</span>
+                  <div class="flex-1"><div class="text-cream text-[10px] font-semibold">New message from Mme Setshedi</div><div class="text-sand/40 text-[9px]">Read 45 min ago</div></div>
+                  <span class="font-mono text-[10px] text-kalahari font-bold">💬</span>
+                </div>
+              </div>
+              <div class="bg-[#1A2E1A] border border-green-800/40 rounded-xl px-3 py-2.5 flex items-center gap-2">
+                <span class="text-base pulse-soft">🟢</span>
+                <span class="text-green-300 text-[10px]">Parent notified via <strong>WhatsApp</strong> · 2 min ago</span>
+              </div>
+            </div>
+            <!-- Grades panel -->
+            <div id="panel-grades" class="db-panel flex-1 overflow-y-auto px-4 py-3 space-y-2">
+              <div class="text-sand/40 text-[9px] uppercase tracking-wide mb-2">Term 2 Grade Report</div>
+              <div id="grade-rows" class="space-y-2"></div>
+            </div>
+            <!-- Conduct panel -->
+            <div id="panel-conduct" class="db-panel flex-1 overflow-y-auto px-4 py-3 space-y-2">
+              <div class="flex items-center justify-between mb-2">
+                <div class="text-sand/40 text-[9px] uppercase tracking-wide">Conduct Ledger</div>
+                <div class="bg-kalahari/20 rounded-full px-2 py-0.5 text-[9px] text-kalahari font-bold">Total: +18 pts</div>
+              </div>
+              <div id="conduct-rows" class="space-y-1.5"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute -top-3 -right-3 bg-gold text-earth text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 bg-earth rounded-full pulse-soft"></span> Live Updates
+      </div>
+      <div class="absolute -bottom-3 -left-3 bg-earth text-cream text-[10px] font-medium px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+        🌍 Setswana / English
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE TEACHERS & PARENTS CONNECT -->
+<section id="connect" class="py-28 bg-earth relative overflow-hidden">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-kalahari/8 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-5 relative z-10">
+    <div class="text-center mb-16 reveal">
+      <div class="inline-flex items-center gap-2 bg-kalahari/20 border border-kalahari/30 text-gold text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">Where Teachers &amp; Parents Connect</div>
+      <h2 class="font-display text-4xl lg:text-5xl font-black text-cream leading-tight">No More Silence Between<br><span class="text-gold">School &amp; Home</span></h2>
+      <p class="text-sand/60 mt-4 max-w-xl mx-auto leading-relaxed">Secure, bilingual, real-time communication — from classroom to living room — with full context so every conversation is productive.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6 items-start reveal">
+
+      <!-- TEACHER PANEL -->
+      <div class="bg-[#1A0F07] border border-kalahari/20 rounded-2xl overflow-hidden">
+        <div class="bg-kalahari/20 border-b border-kalahari/20 px-5 py-4 flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-kalahari flex items-center justify-center text-earth font-bold text-sm">MS</div>
+          <div>
+            <div class="text-cream font-semibold text-sm">Mme Setshedi</div>
+            <div class="text-sand/50 text-xs">Mathematics · Grade 10A</div>
+          </div>
+          <div class="ml-auto flex items-center gap-1.5">
+            <span class="w-2 h-2 bg-green-400 rounded-full pulse-soft"></span>
+            <span class="text-green-400 text-[10px] font-mono">Online</span>
+          </div>
+        </div>
+        <div class="p-4 space-y-3 border-b border-white/5">
+          <div class="text-sand/40 text-[9px] uppercase tracking-wide">Class 10A Snapshot</div>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="bg-earth/60 rounded-xl p-3 text-center"><div class="text-gold font-display font-bold text-lg">28</div><div class="text-sand/40 text-[9px]">Students</div></div>
+            <div class="bg-earth/60 rounded-xl p-3 text-center"><div class="text-green-400 font-display font-bold text-lg">24</div><div class="text-sand/40 text-[9px]">Present Today</div></div>
+          </div>
+          <div class="bg-kalahari/10 border border-kalahari/20 rounded-xl p-3">
+            <div class="text-sand/50 text-[9px] uppercase tracking-wide mb-2">Recent Assessment — Maths Quiz</div>
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between bg-earth/40 rounded-lg px-3 py-1.5">
+                <span class="text-cream text-[10px]">Keabetswe M.</span><span class="font-mono text-[10px] text-gold">84/100</span>
+              </div>
+              <div class="flex items-center justify-between bg-earth/40 rounded-lg px-3 py-1.5">
+                <span class="text-cream text-[10px]">Lesedi K.</span><span class="font-mono text-[10px] text-gold">79/100</span>
+              </div>
+              <div class="flex items-center justify-between bg-earth/40 rounded-lg px-3 py-1.5">
+                <span class="text-cream text-[10px]">Tshegofatso B.</span><span class="font-mono text-[10px] text-amber-400">61/100</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="text-sand/40 text-[9px] uppercase tracking-wide mb-3">Message to Parent</div>
+          <div class="bg-earth/50 rounded-xl p-3 space-y-2">
+            <div class="flex items-center gap-2 bg-earth/60 rounded-lg px-3 py-1.5">
+              <span class="text-sand/40 text-[10px]">To:</span>
+              <span class="text-cream text-[10px]">Mma Molebatsi (Parent)</span>
+            </div>
+            <div class="space-y-1.5 py-1">
+              <div class="flex justify-end">
+                <div class="bg-kalahari rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%]">
+                  <p class="text-cream text-[10px] leading-relaxed">Dumela Mma Molebatsi, Keabetswe scored 84% in today's test. 🎉</p>
+                  <div class="text-cream/40 text-[8px] text-right mt-1">09:42 ✓✓</div>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="bg-earth/80 border border-white/5 rounded-xl rounded-tl-sm px-3 py-2 max-w-[85%]">
+                  <p class="text-sand/80 text-[10px] leading-relaxed">Ke a leboga Mme! Thank you so much 🙏</p>
+                  <div class="text-sand/30 text-[8px] mt-1">09:51</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 bg-earth/80 rounded-xl px-3 py-2 border border-white/5">
+              <span class="text-sand/30 text-xs flex-1">Type a message…</span>
+              <span class="text-sand/30 text-xs">🌍</span>
+              <div class="w-6 h-6 bg-kalahari rounded-lg flex items-center justify-center">
+                <svg class="w-3 h-3 text-earth" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTRE BRIDGE -->
+      <div class="flex flex-col items-center gap-5">
+        <div class="bg-[#1A0F07] border border-kalahari/20 rounded-2xl p-5 w-full">
+          <div class="text-center mb-4"><div class="text-sand/40 text-[9px] uppercase tracking-widest">Live Bridge</div></div>
+          <div class="relative flex flex-col items-center gap-3">
+            <div class="flex items-center gap-3 self-start">
+              <div class="w-10 h-10 rounded-full bg-kalahari/30 border-2 border-kalahari flex items-center justify-center text-lg">👩‍🏫</div>
+              <div class="text-cream text-xs font-semibold">Teacher</div>
+            </div>
+            <div class="relative w-full flex flex-col items-center my-1">
+              <svg width="60" height="80" viewBox="0 0 60 80" class="overflow-visible">
+                <line x1="30" y1="0" x2="30" y2="80" stroke="#C4742A" stroke-width="2" class="conn-line" opacity="0.5"/>
+                <circle cx="30" cy="20" r="4" fill="#E8A93C" class="pulse-soft"/>
+                <circle cx="30" cy="40" r="4" fill="#C4742A"/>
+                <circle cx="30" cy="60" r="4" fill="#E8A93C" class="pulse-soft"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="bg-gold text-earth text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">LIVE</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 self-end">
+              <div class="text-cream text-xs font-semibold">Parent</div>
+              <div class="w-10 h-10 rounded-full bg-sky/30 border-2 border-river flex items-center justify-center text-lg">👪</div>
+            </div>
+          </div>
+          <div class="mt-5 space-y-2">
+            <div class="flex items-center justify-between bg-earth/50 rounded-xl px-3 py-2">
+              <span class="text-sand/60 text-[10px]">Messages today</span><span class="font-mono text-[10px] text-gold font-bold">47</span>
+            </div>
+            <div class="flex items-center justify-between bg-earth/50 rounded-xl px-3 py-2">
+              <span class="text-sand/60 text-[10px]">Avg response time</span><span class="font-mono text-[10px] text-green-400 font-bold">12 min</span>
+            </div>
+            <div class="flex items-center justify-between bg-earth/50 rounded-xl px-3 py-2">
+              <span class="text-sand/60 text-[10px]">Languages</span><span class="font-mono text-[10px] text-kalahari font-bold">EN · STN</span>
+            </div>
+            <div class="flex items-center justify-between bg-earth/50 rounded-xl px-3 py-2">
+              <span class="text-sand/60 text-[10px]">Channels</span><span class="font-mono text-[10px] text-sand/70 font-bold">App · SMS · WA</span>
+            </div>
+          </div>
+        </div>
+        <div class="w-full bg-[#1A0F07] border border-kalahari/20 rounded-2xl p-5">
+          <div class="text-sand/40 text-[9px] uppercase tracking-widest mb-3">Alert Types</div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 bg-green-900/30 border border-green-600/20 rounded-xl px-3 py-2"><span>🏆</span><span class="text-green-300 text-[10px]">Achievement unlocked</span></div>
+            <div class="flex items-center gap-2 bg-amber-900/20 border border-amber-600/20 rounded-xl px-3 py-2"><span>📋</span><span class="text-amber-300 text-[10px]">Assignment reminder</span></div>
+            <div class="flex items-center gap-2 bg-red-900/20 border border-red-600/20 rounded-xl px-3 py-2"><span>⚠️</span><span class="text-red-300 text-[10px]">Attendance alert</span></div>
+            <div class="flex items-center gap-2 bg-kalahari/10 border border-kalahari/20 rounded-xl px-3 py-2"><span>💬</span><span class="text-sand/70 text-[10px]">New teacher message</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARENT PANEL -->
+      <div class="bg-[#1A0F07] border border-river/20 rounded-2xl overflow-hidden">
+        <div class="bg-sky/20 border-b border-river/20 px-5 py-4 flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-sky flex items-center justify-center text-cream font-bold text-sm">MM</div>
+          <div>
+            <div class="text-cream font-semibold text-sm">Mma Molebatsi</div>
+            <div class="text-sand/50 text-xs">Parent of Keabetswe · 10A</div>
+          </div>
+          <div class="ml-auto relative">
+            <span>🔔</span>
+            <span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full"></span>
+          </div>
+        </div>
+        <div class="p-4 space-y-3 border-b border-white/5">
+          <div class="text-sand/40 text-[9px] uppercase tracking-wide">Keabetswe's Summary</div>
+          <div class="flex items-center gap-4">
+            <div class="relative w-16 h-16 flex-shrink-0">
+              <svg viewBox="0 0 36 36" class="w-full h-full">
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#2C1A0E" stroke-width="3"/>
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#E8A93C" stroke-width="3" stroke-dasharray="83 17" stroke-dashoffset="25" class="ring-progress" stroke-linecap="round"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center"><span class="text-gold font-display font-black text-sm">83%</span></div>
+            </div>
+            <div class="space-y-1.5 flex-1">
+              <div class="flex justify-between"><span class="text-sand/60 text-[10px]">Maths</span><span class="text-gold font-mono text-[10px]">84%</span></div>
+              <div class="w-full bg-earth/60 rounded-full h-1"><div class="bg-gold h-1 rounded-full" style="width:84%"></div></div>
+              <div class="flex justify-between"><span class="text-sand/60 text-[10px]">English</span><span class="text-gold font-mono text-[10px]">91%</span></div>
+              <div class="w-full bg-earth/60 rounded-full h-1"><div class="bg-gold h-1 rounded-full" style="width:91%"></div></div>
+              <div class="flex justify-between"><span class="text-sand/60 text-[10px]">Science</span><span class="text-amber-400 font-mono text-[10px]">76%</span></div>
+              <div class="w-full bg-earth/60 rounded-full h-1"><div class="bg-amber-400 h-1 rounded-full" style="width:76%"></div></div>
+            </div>
+          </div>
+          <div class="bg-earth/50 rounded-xl p-3">
+            <div class="flex items-center justify-between mb-1.5"><span class="text-sand/50 text-[9px] uppercase tracking-wide">This Week</span><span class="text-green-400 text-[9px] font-mono">5/5 ✓</span></div>
+            <div class="flex gap-1.5">
+              <div class="flex-1 h-5 bg-green-500/30 border border-green-500/30 rounded text-[8px] text-green-400 flex items-center justify-center">M</div>
+              <div class="flex-1 h-5 bg-green-500/30 border border-green-500/30 rounded text-[8px] text-green-400 flex items-center justify-center">T</div>
+              <div class="flex-1 h-5 bg-green-500/30 border border-green-500/30 rounded text-[8px] text-green-400 flex items-center justify-center">W</div>
+              <div class="flex-1 h-5 bg-green-500/30 border border-green-500/30 rounded text-[8px] text-green-400 flex items-center justify-center">T</div>
+              <div class="flex-1 h-5 bg-green-500/30 border border-green-500/30 rounded text-[8px] text-green-400 flex items-center justify-center">F</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="text-sand/40 text-[9px] uppercase tracking-wide mb-3">From Mme Setshedi</div>
+          <div class="bg-earth/50 rounded-xl p-3 space-y-2">
+            <div class="space-y-1.5">
+              <div class="flex">
+                <div class="bg-kalahari/30 border border-kalahari/20 rounded-xl rounded-tl-sm px-3 py-2 max-w-[85%]">
+                  <p class="text-sand/90 text-[10px] leading-relaxed">Dumela Mma Molebatsi, Keabetswe scored 84% in today's test. 🎉</p>
+                  <div class="text-sand/30 text-[8px] mt-1">09:42</div>
+                </div>
+              </div>
+              <div class="flex justify-end">
+                <div class="bg-sky/30 border border-river/20 rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%]">
+                  <p class="text-sand/80 text-[10px] leading-relaxed">Ke a leboga Mme! Thank you 🙏</p>
+                  <div class="text-sand/30 text-[8px] text-right mt-1">09:51 ✓✓</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="bg-earth/60 rounded-xl px-3 py-2 flex items-center gap-1">
+                  <div class="w-1.5 h-1.5 bg-sand/40 rounded-full dot1"></div>
+                  <div class="w-1.5 h-1.5 bg-sand/40 rounded-full dot2"></div>
+                  <div class="w-1.5 h-1.5 bg-sand/40 rounded-full dot3"></div>
+                </div>
+                <span class="text-sand/30 text-[9px]">Mme Setshedi is typing…</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 bg-earth/80 rounded-xl px-3 py-2 border border-white/5">
+              <span class="text-sand/30 text-xs flex-1">Reply…</span>
+              <span class="text-sand/30 text-xs">🎙️</span>
+              <div class="w-6 h-6 bg-sky rounded-lg flex items-center justify-center">
+                <svg class="w-3 h-3 text-cream" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 bg-[#1A2E1A] border border-green-800/30 rounded-xl px-3 py-2.5 flex items-center gap-2">
+            <span>📲</span><span class="text-green-300 text-[10px]">Also sent via <strong>WhatsApp</strong> &amp; SMS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 pillars beneath -->
+    <div class="grid md:grid-cols-3 gap-5 mt-10 reveal">
+      <div class="bg-kalahari/10 border border-kalahari/20 rounded-2xl p-5 text-center">
+        <div class="text-3xl mb-3">🌍</div>
+        <div class="font-display text-lg font-bold text-cream mb-2">Bilingual by Default</div>
+        <p class="text-sand/60 text-sm leading-relaxed">Every message auto-translated between Setswana and English so no parent or teacher is left behind.</p>
+      </div>
+      <div class="bg-kalahari/10 border border-kalahari/20 rounded-2xl p-5 text-center">
+        <div class="text-3xl mb-3">📡</div>
+        <div class="font-display text-lg font-bold text-cream mb-2">Triple-Channel Reach</div>
+        <p class="text-sand/60 text-sm leading-relaxed">In-app, SMS, and WhatsApp delivery — so connectivity gaps never break the school-to-home bridge.</p>
+      </div>
+      <div class="bg-kalahari/10 border border-kalahari/20 rounded-2xl p-5 text-center">
+        <div class="text-3xl mb-3">🔒</div>
+        <div class="font-display text-lg font-bold text-cream mb-2">Safe &amp; Private</div>
+        <p class="text-sand/60 text-sm leading-relaxed">All messages are encrypted and role-locked — parents see only their child, teachers manage only their class.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXT -->
+<section id="context" class="py-24 bg-pattern">
+  <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <div class="inline-flex items-center gap-2 bg-kalahari/10 border border-kalahari/30 text-clay text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">The Context</div>
+      <h2 class="font-display text-4xl lg:text-5xl font-black text-earth leading-tight mb-5">Post-Corporal Punishment<br><span class="text-kalahari">Botswana Needs New Tools.</span></h2>
+      <p class="text-[#5A3A1A]/80 leading-relaxed mb-4">With the abolishment of corporal punishment in Botswana schools, a critical gap emerged. Rising classroom disruptions, low parental visibility, and overwhelmed teachers created urgent need for collaborative, non-punitive accountability.</p>
+      <p class="text-[#5A3A1A]/80 leading-relaxed">Tshwaragano was built to fill that gap — replacing fear with communication, and silence with shared accountability.</p>
+    </div>
+    <div class="reveal grid grid-cols-2 gap-4">
+      <div class="bg-earth rounded-2xl p-6"><div class="font-display text-4xl font-black text-gold mb-2">↑ 34%</div><p class="text-sand/70 text-sm leading-relaxed">Rise in classroom disruptions post-2020 policy shift</p></div>
+      <div class="bg-earth rounded-2xl p-6"><div class="font-display text-4xl font-black text-gold mb-2">60%</div><p class="text-sand/70 text-sm leading-relaxed">Parents never receiving real-time updates from teachers</p></div>
+      <div class="bg-earth rounded-2xl p-6 col-span-2"><div class="font-display text-4xl font-black text-gold mb-2">1 Platform</div><p class="text-sand/70 text-sm leading-relaxed">For teachers, parents, students and administrators — bilingual, mobile-first, built for Botswana.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="py-24 bg-sand/30">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center mb-14 reveal">
+      <div class="inline-flex items-center gap-2 bg-kalahari/10 border border-kalahari/30 text-clay text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">Platform Features</div>
+      <h2 class="font-display text-4xl lg:text-5xl font-black text-earth">Everything a School Community Needs</h2>
+      <p class="text-[#5A3A1A]/80 mt-4 max-w-xl mx-auto leading-relaxed">From live grades to conduct tracking — one platform, every stakeholder, total transparency.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="feature-card lg:col-span-2 bg-white border border-earth/10 rounded-2xl p-7 reveal">
+        <div class="w-12 h-12 rounded-xl bg-kalahari/15 flex items-center justify-center text-2xl mb-4">📊</div>
+        <h3 class="font-display text-xl font-bold text-earth mb-2">Real-Time Academic Dashboard</h3>
+        <p class="text-[#5A3A1A]/80 text-sm leading-relaxed">Live grade updates, test scores, class averages, and subject-specific performance trends. Teachers log assessments instantly — no more surprise report cards.</p>
+        <span class="inline-block mt-4 bg-kalahari/10 text-kalahari text-xs font-semibold px-3 py-1 rounded-full">Core Feature</span>
+      </div>
+      <div class="feature-card bg-earth rounded-2xl p-7 reveal">
+        <div class="w-12 h-12 rounded-xl bg-kalahari/30 flex items-center justify-center text-2xl mb-4">🧭</div>
+        <h3 class="font-display text-xl font-bold text-cream mb-2">Behaviour &amp; Conduct Tracker</h3>
+        <p class="text-sand/70 text-sm leading-relaxed">Log positive behaviour, participation, and incidents — restorative entries visible to parents immediately.</p>
+        <span class="inline-block mt-4 bg-gold/20 text-gold text-xs font-semibold px-3 py-1 rounded-full">New Era Tool</span>
+      </div>
+      <div class="feature-card bg-white border border-earth/10 rounded-2xl p-7 reveal">
+        <div class="w-12 h-12 rounded-xl bg-sky/10 flex items-center justify-center text-2xl mb-4">💬</div>
+        <h3 class="font-display text-xl font-bold text-earth mb-2">Parent–Teacher Messaging</h3>
+        <p class="text-[#5A3A1A]/80 text-sm leading-relaxed">Secure, bilingual messaging in English or Setswana. Schedule meetings and share concerns directly in-app.</p>
+        <span class="inline-block mt-4 bg-sky/10 text-sky text-xs font-semibold px-3 py-1 rounded-full">Communication</span>
+      </div>
+      <div class="feature-card bg-white border border-earth/10 rounded-2xl p-7 reveal">
+        <div class="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center text-2xl mb-4">🔔</div>
+        <h3 class="font-display text-xl font-bold text-earth mb-2">Smart Alerts &amp; Notifications</h3>
+        <p class="text-[#5A3A1A]/80 text-sm leading-relaxed">Auto-alerts for missed homework, low grades, and attendance drops — via app, SMS, or WhatsApp.</p>
+        <span class="inline-block mt-4 bg-gold/10 text-clay text-xs font-semibold px-3 py-1 rounded-full">Inclusivity</span>
+      </div>
+      <div class="feature-card bg-white border border-earth/10 rounded-2xl p-7 reveal">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-2xl mb-4">📅</div>
+        <h3 class="font-display text-xl font-bold text-earth mb-2">Attendance &amp; Timetable</h3>
+        <p class="text-[#5A3A1A]/80 text-sm leading-relaxed">Live attendance records with absence reason tracking. Parents notified the moment a child is marked absent.</p>
+        <span class="inline-block mt-4 bg-accent/10 text-accent text-xs font-semibold px-3 py-1 rounded-full">Safety</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section id="roles" class="py-24 bg-pattern">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center mb-14 reveal">
+      <div class="inline-flex items-center gap-2 bg-kalahari/10 border border-kalahari/30 text-clay text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">Who It's For</div>
+      <h2 class="font-display text-4xl lg:text-5xl font-black text-earth">Every Role, One Platform</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="feature-card bg-white border-2 border-earth/10 rounded-2xl p-7 reveal">
+        <div class="text-4xl mb-4">👩‍🏫</div>
+        <div class="font-display text-xl font-bold text-earth mb-1">Teachers</div>
+        <div class="text-kalahari text-sm font-semibold mb-5">Class Management</div>
+        <ul class="space-y-2.5 list-none p-0 m-0">
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Log grades &amp; assessments instantly</li>
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Record conduct entries (positive &amp; negative)</li>
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Message parents directly &amp; securely</li>
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Track class-wide performance trends</li>
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Submit lesson plans &amp; materials</li>
+        </ul>
+      </div>
+      <div class="feature-card bg-earth border-2 border-earth rounded-2xl p-7 reveal">
+        <div class="text-4xl mb-4">👪</div>
+        <div class="font-display text-xl font-bold text-cream mb-1">Parents &amp; Guardians</div>
+        <div class="text-gold text-sm font-semibold mb-5">Home Partnership</div>
+        <ul class="space-y-2.5 list-none p-0 m-0">
+          <li class="flex items-start gap-2 text-sm text-sand/80"><span class="text-gold mt-0.5">✓</span>View live grades across all subjects</li>
+          <li class="flex items-start gap-2 text-sm text-sand/80"><span class="text-gold mt-0.5">✓</span>Receive behaviour &amp; attendance alerts</li>
+          <li class="flex items-start gap-2 text-sm text-sand/80"><span class="text-gold mt-0.5">✓</span>Chat with teachers in Setswana/English</li>
+          <li class="flex items-start gap-2 text-sm text-sand/80"><span class="text-gold mt-0.5">✓</span>See homework assignments &amp; due dates</li>
+          <li class="flex items-start gap-2 text-sm text-sand/80"><span class="text-gold mt-0.5">✓</span>Monitor progress over time with charts</li>
+        </ul>
+      </div>
+      <div class="feature-card bg-white border-2 border-earth/10 rounded-2xl p-7 reveal">
+        <div class="text-4xl mb-4">🏫</div>
+        <div class="font-display text-xl font-bold text-earth mb-1">School Administration</div>
+        <div class="text-kalahari text-sm font-semibold mb-5">Institutional Oversight</div>
+        <ul class="space-y-2.5 list-none p-0 m-0">
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>School-wide academic analytics</li>
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Conduct trend reports per class &amp; grade</li>
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Staff communication tools</li>
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Ministry-ready reporting exports</li>
+          <li class="flex items-start gap-2 text-sm text-[#5A3A1A]"><span class="text-kalahari mt-0.5">✓</span>Intervention flagging dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONDUCT DEMO -->
+<section id="conduct" class="py-24 bg-sand/30">
+  <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <div class="inline-flex items-center gap-2 bg-kalahari/10 border border-kalahari/30 text-clay text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">Restorative Discipline</div>
+      <h2 class="font-display text-4xl lg:text-5xl font-black text-earth leading-tight mb-5">Beyond Punishment —<br><span class="text-kalahari">Towards Accountability</span></h2>
+      <p class="text-[#5A3A1A]/80 leading-relaxed mb-4">Tshwaragano replaces the cane with communication. Conduct entries are shared with parents instantly, enabling home reinforcement of school values.</p>
+      <p class="text-[#5A3A1A]/80 leading-relaxed">Teachers flag students early, counsellors are looped in automatically, and parents are partners in resolution — not just recipients of punishment notices.</p>
+    </div>
+    <div class="reveal">
+      <div class="bg-white border border-earth/10 rounded-2xl overflow-hidden shadow-xl">
+        <div class="bg-earth px-5 py-4 flex items-center justify-between">
+          <span class="text-cream font-semibold text-sm">Conduct Log — Keabetswe</span>
+          <span class="flex items-center gap-1.5 text-green-400 text-xs font-mono"><span class="w-2 h-2 bg-green-400 rounded-full pulse-soft"></span>Live</span>
+        </div>
+        <div class="divide-y divide-earth/5">
+          <div class="flex items-center justify-between px-5 py-4">
+            <div class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-green-400 flex-shrink-0"></span><div><div class="text-sm font-semibold text-earth">Excellent class participation</div><div class="text-xs text-[#7A5030] mt-0.5">Mathematics · Mme Setshedi · Mon 9am</div></div></div>
+            <span class="bg-green-50 text-green-700 text-xs font-mono font-bold px-2.5 py-1 rounded-full">+5 pts</span>
+          </div>
+          <div class="flex items-center justify-between px-5 py-4">
+            <div class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-green-400 flex-shrink-0"></span><div><div class="text-sm font-semibold text-earth">Helped a struggling classmate</div><div class="text-xs text-[#7A5030] mt-0.5">Free period · Observed by prefect</div></div></div>
+            <span class="bg-green-50 text-green-700 text-xs font-mono font-bold px-2.5 py-1 rounded-full">+3 pts</span>
+          </div>
+          <div class="flex items-center justify-between px-5 py-4">
+            <div class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-amber-400 flex-shrink-0"></span><div><div class="text-sm font-semibold text-earth">Late to class — second time</div><div class="text-xs text-[#7A5030] mt-0.5">English · Rra Molefe · Wed 8:15am</div></div></div>
+            <span class="bg-amber-50 text-amber-700 text-xs font-mono font-bold px-2.5 py-1 rounded-full">−2 pts</span>
+          </div>
+          <div class="flex items-center justify-between px-5 py-4">
+            <div class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-red-400 flex-shrink-0"></span><div><div class="text-sm font-semibold text-earth">Homework not submitted</div><div class="text-xs text-[#7A5030] mt-0.5">Science · Friday · 3rd occurrence</div></div></div>
+            <span class="bg-red-50 text-red-700 text-xs font-mono font-bold px-2.5 py-1 rounded-full">−3 pts</span>
+          </div>
+        </div>
+        <div class="bg-gold/10 border-t border-gold/20 px-5 py-3 flex items-center gap-2">
+          <span class="pulse-soft">🔔</span>
+          <span class="text-earth text-xs">Parent notified via <strong class="text-kalahari">WhatsApp</strong> — 2 minutes ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="register" class="py-24 bg-earth">
+  <div class="max-w-3xl mx-auto px-5 text-center reveal">
+    <div class="inline-flex items-center gap-2 bg-kalahari/20 border border-kalahari/30 text-gold text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-7">Join Botswana's School Revolution</div>
+    <h2 class="font-display text-4xl lg:text-5xl font-black text-cream leading-tight mb-5">Let's Build Better Schools<br><span class="text-gold">Together.</span></h2>
+    <p class="text-sand/70 text-[1.02rem] leading-relaxed mb-10 max-w-xl mx-auto">Tshwaragano means "togetherness" in Setswana. Because education works best when families and teachers move as one — informed, aligned, and united around every child's success.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="#register" class="px-8 py-4 bg-gold text-earth font-bold text-base rounded-xl hover:bg-cream transition-all hover:-translate-y-0.5 hover:shadow-xl">Register Your School</a>
+      <a href="#features" class="px-8 py-4 border-2 border-sand/30 text-cream font-medium text-base rounded-xl hover:border-gold hover:text-gold transition-all">Download for Parents</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#1A0F07] border-t border-kalahari/10 pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="grid md:grid-cols-4 gap-10 mb-14">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 bg-earth border border-kalahari/30 rounded-xl flex items-center justify-center text-gold">✦</div>
+          <span class="font-display text-xl font-black text-cream">Tshwara<span class="text-kalahari">gano</span></span>
+        </div>
+        <p class="text-sand/50 text-sm leading-relaxed">A parent–teacher academic platform for Botswana schools — built on communication, transparency, and the belief that every child deserves to thrive.</p>
+      </div>
+      <div>
+        <div class="text-sand/40 text-xs font-semibold uppercase tracking-widest mb-4">Platform</div>
+        <ul class="space-y-2.5 list-none m-0 p-0">
+          <li><a href="#features" class="text-sand/60 text-sm hover:text-gold transition-colors">Features</a></li>
+          <li><a href="#features" class="text-sand/60 text-sm hover:text-gold transition-colors">Grade Tracker</a></li>
+          <li><a href="#conduct"  class="text-sand/60 text-sm hover:text-gold transition-colors">Conduct Log</a></li>
+          <li><a href="#connect"  class="text-sand/60 text-sm hover:text-gold transition-colors">Messaging</a></li>
+          <li><a href="#connect"  class="text-sand/60 text-sm hover:text-gold transition-colors">Alerts</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-sand/40 text-xs font-semibold uppercase tracking-widest mb-4">For Schools</div>
+        <ul class="space-y-2.5 list-none m-0 p-0">
+          <li><a href="#roles"    class="text-sand/60 text-sm hover:text-gold transition-colors">Admin Portal</a></li>
+          <li><a href="#roles"    class="text-sand/60 text-sm hover:text-gold transition-colors">Teacher Tools</a></li>
+          <li><a href="#context"  class="text-sand/60 text-sm hover:text-gold transition-colors">Data Reports</a></li>
+          <li><a href="#register" class="text-sand/60 text-sm hover:text-gold transition-colors">Onboarding</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-sand/40 text-xs font-semibold uppercase tracking-widest mb-4">Support</div>
+        <ul class="space-y-2.5 list-none m-0 p-0">
+          <li><a href="#home"     class="text-sand/60 text-sm hover:text-gold transition-colors">Help Centre</a></li>
+          <li><a href="#register" class="text-sand/60 text-sm hover:text-gold transition-colors">Contact Us</a></li>
+          <li><a href="#home"     class="text-sand/60 text-sm hover:text-gold transition-colors">Privacy Policy</a></li>
+          <li><a href="#home"     class="text-sand/60 text-sm hover:text-gold transition-colors">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-kalahari/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <span class="text-sand/30 text-xs">© 2025 Tshwaragano · All rights reserved</span>
+      <span class="text-sand/40 text-xs">🇧🇼 Proudly built for Botswana</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Dashboard tabs
+function switchTab(btn,panel){
+  document.querySelectorAll('.db-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.db-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+panel).classList.add('active');
+}
+
+// Populate grades
+const grades=[
+  {sub:'Mathematics',score:84,color:'#E8A93C'},
+  {sub:'English',score:91,color:'#E8A93C'},
+  {sub:'Science',score:76,color:'#D97706'},
+  {sub:'History',score:88,color:'#E8A93C'},
+  {sub:'BRS',score:68,color:'#C4742A'},
+  {sub:'Setswana',score:82,color:'#E8A93C'},
+];
+const gr=document.getElementById('grade-rows');
+grades.forEach(g=>{
+  gr.innerHTML+=`<div class="bg-earth/40 rounded-xl px-3 py-2.5 flex items-center gap-3">
+    <div class="text-sand/70 text-[10px] w-20 flex-shrink-0">${g.sub}</div>
+    <div class="flex-1 bg-earth/60 rounded-full h-1.5"><div class="h-1.5 rounded-full" style="width:${g.score}%;background:${g.color}"></div></div>
+    <div class="font-mono text-[10px] font-bold w-8 text-right" style="color:${g.color}">${g.score}%</div>
+  </div>`;
+});
+
+// Populate conduct
+const conducts=[
+  {text:'Excellent class participation',sub:'Mathematics · Mon',pts:'+5',type:'good'},
+  {text:'Helped struggling classmate',sub:'Free period · Tue',pts:'+3',type:'good'},
+  {text:'Perfect attendance this week',sub:'All classes · Fri',pts:'+4',type:'good'},
+  {text:'Late to class — 2nd time',sub:'English · Wed',pts:'−2',type:'warn'},
+  {text:'Homework not submitted',sub:'Science · Fri · 3rd',pts:'−3',type:'bad'},
+];
+const cc=document.getElementById('conduct-rows');
+const cols={good:'border-green-600/20 bg-green-900/20',warn:'border-amber-600/20 bg-amber-900/10',bad:'border-red-600/20 bg-red-900/10'};
+const dc={good:'bg-green-400',warn:'bg-amber-400',bad:'bg-red-400'};
+const pc={good:'text-green-400',warn:'text-amber-400',bad:'text-red-400'};
+conducts.forEach(c=>{
+  cc.innerHTML+=`<div class="flex items-center gap-2 border rounded-xl px-3 py-2 ${cols[c.type]}">
+    <span class="w-2 h-2 rounded-full flex-shrink-0 ${dc[c.type]}"></span>
+    <div class="flex-1"><div class="text-cream text-[10px] font-semibold">${c.text}</div><div class="text-sand/40 text-[9px]">${c.sub}</div></div>
+    <span class="font-mono text-[10px] font-bold ${pc[c.type]}">${c.pts}</span>
+  </div>`;
+});
+</script>
+</body>
+</html>
