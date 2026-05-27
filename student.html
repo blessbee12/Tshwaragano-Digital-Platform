@@ -27,26 +27,64 @@
   </style>
 </head>
 <body class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(196,116,42,.16),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(26,58,92,.12),transparent_35%)]">
-
 <section id="loginPage" class="min-h-screen flex items-center justify-center px-4 py-10">
   <div class="glass w-full max-w-md rounded-3xl shadow-2xl border border-white/70 p-8 sm:p-10">
-    <a href="tshwaragano.html" class="inline-flex items-center gap-2 text-sm font-semibold text-kalahari mb-8">← Back to home</a>
+    
+    <a href="index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-kalahari mb-8">
+      ← Back to home
+    </a>
+
     <div class="text-center mb-8">
-      <div class="mx-auto w-16 h-16 rounded-2xl bg-earth text-gold flex items-center justify-center text-3xl shadow-lg">🎓</div>
+
+      <!-- LOGO PLACEHOLDER: Replace logo.png with your actual logo file -->
+      <div class="mx-auto w-24 h-24 rounded-3xl bg-white border border-earth/10 shadow-lg flex items-center justify-center overflow-hidden">
+        <img 
+          src="logo.png" 
+          alt="Tshwaragano Digital Platform Logo" 
+          class="w-full h-full object-contain p-3"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;font-display text-3xl font-black text-earth&quot;>T</span>';"
+        />
+      </div>
+
       <h1 class="font-display text-4xl font-black mt-4">Student Portal</h1>
-      <p class="text-sm text-earth/60 mt-2">Track grades, homework, timetable, conduct, and messages.</p>
+      <p class="text-sm text-earth/60 mt-2">
+        Track grades, homework, timetable, conduct, and messages.
+      </p>
     </div>
+
     <form id="loginForm" class="space-y-4">
       <div>
         <label class="text-sm font-semibold" for="email">Student email</label>
-        <input id="email" type="email" value="student@tshwaragano.co.bw" required class="mt-2 w-full rounded-xl border border-earth/15 bg-white px-4 py-3 outline-none focus:ring-4 focus:ring-kalahari/20" />
+        <input 
+          id="email" 
+          type="email" 
+          value="student@tshwaragano.co.bw" 
+          required 
+          class="mt-2 w-full rounded-xl border border-earth/15 bg-white px-4 py-3 outline-none focus:ring-4 focus:ring-kalahari/20" 
+        />
       </div>
+
       <div>
         <label class="text-sm font-semibold" for="password">Password</label>
-        <input id="password" type="password" value="demo123" required minlength="4" class="mt-2 w-full rounded-xl border border-earth/15 bg-white px-4 py-3 outline-none focus:ring-4 focus:ring-kalahari/20" />
+        <input 
+          id="password" 
+          type="password" 
+          value="demo123" 
+          required 
+          minlength="4" 
+          class="mt-2 w-full rounded-xl border border-earth/15 bg-white px-4 py-3 outline-none focus:ring-4 focus:ring-kalahari/20" 
+        />
       </div>
-      <button class="w-full rounded-xl bg-earth text-cream py-3.5 font-bold hover:bg-kalahari transition shadow-lg" type="submit">Login to Dashboard</button>
-      <p class="text-xs text-center text-earth/50">Demo mode: any valid email and password works.</p>
+
+      <button 
+        class="w-full rounded-xl bg-earth text-cream py-3.5 font-bold hover:bg-kalahari transition shadow-lg" 
+        type="submit">
+        Login to Dashboard
+      </button>
+
+      <p class="text-xs text-center text-earth/50">
+        Demo mode: any valid email and password works.
+      </p>
     </form>
   </div>
 </section>
@@ -54,19 +92,41 @@
 <section id="dashboardPage" class="hidden min-h-screen">
   <header class="sticky top-0 z-40 bg-cream/90 backdrop-blur-xl border-b border-earth/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-3">
-      <a href="tshwaragano.html" class="flex items-center gap-3 min-w-0">
-        <div class="w-11 h-11 rounded-2xl bg-earth text-gold flex items-center justify-center font-black">T</div>
+      
+      <a href="index.html" class="flex items-center gap-3 min-w-0">
+
+        <!-- HEADER LOGO PLACEHOLDER: Replace logo.png with your actual logo file -->
+        <div class="w-12 h-12 rounded-2xl bg-white border border-earth/10 shadow-md flex items-center justify-center overflow-hidden shrink-0">
+          <img 
+            src="logo.png" 
+            alt="Tshwaragano Digital Platform Logo" 
+            class="w-full h-full object-contain p-2"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;font-display text-xl font-black text-earth&quot;>T</span>';"
+          />
+        </div>
+
         <div class="min-w-0">
           <p class="font-display text-xl font-black leading-none truncate">Tshwaragano</p>
           <p class="text-xs text-earth/55 truncate">Student Dashboard</p>
         </div>
       </a>
+
       <div class="flex items-center gap-2">
-        <button id="themeBtn" class="hidden sm:inline-flex rounded-xl border border-earth/10 px-4 py-2 text-sm font-semibold hover:bg-white">Dark mode</button>
-        <button id="logoutBtn" class="rounded-xl bg-red-500 text-white px-4 py-2 text-sm font-bold hover:bg-red-600">Logout</button>
+        <button 
+          id="themeBtn" 
+          class="hidden sm:inline-flex rounded-xl border border-earth/10 px-4 py-2 text-sm font-semibold hover:bg-white">
+          Dark mode
+        </button>
+
+        <button 
+          id="logoutBtn" 
+          class="rounded-xl bg-red-500 text-white px-4 py-2 text-sm font-bold hover:bg-red-600">
+          Logout
+        </button>
       </div>
     </div>
   </header>
+</section>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
     <section class="grid lg:grid-cols-[280px_1fr] gap-6">
