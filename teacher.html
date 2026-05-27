@@ -4,38 +4,566 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tshwaragano | Teacher Portal</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <script>tailwind.config={theme:{extend:{colors:{earth:'#2C1A0E',clay:'#8B4513',kalahari:'#C4742A',gold:'#E8A93C',sand:'#F5DEB3',cream:'#FDF6EC',sky:'#1A3A5C',river:'#2E7D9A',leaf:'#2D6A4F'},fontFamily:{body:['DM Sans','sans-serif'],display:['Playfair Display','serif']}}}}</script>
-  <style>*{box-sizing:border-box}body{font-family:'DM Sans',sans-serif;background:#FDF6EC;color:#2C1A0E}.glass{background:rgba(255,255,255,.84);backdrop-filter:blur(18px)}.card{transition:transform .25s,box-shadow .25s}.card:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(44,26,14,.12)}.toast{animation:slide .35s ease both}@keyframes slide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}} th{white-space:nowrap}</style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            earth: '#2C1A0E',
+            clay: '#8B4513',
+            kalahari: '#C4742A',
+            gold: '#E8A93C',
+            sand: '#F5DEB3',
+            cream: '#FDF6EC',
+            sky: '#1A3A5C',
+            river: '#2E7D9A',
+            leaf: '#2D6A4F'
+          },
+          fontFamily: {
+            body: ['DM Sans', 'sans-serif'],
+            display: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FDF6EC;
+      color: #2C1A0E;
+    }
+
+    .glass {
+      background: rgba(255,255,255,.84);
+      backdrop-filter: blur(18px);
+    }
+
+    .card {
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 45px rgba(44,26,14,.12);
+    }
+
+    .toast {
+      animation: slide .35s ease both;
+    }
+
+    @keyframes slide {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    th {
+      white-space: nowrap;
+    }
+  </style>
 </head>
+
 <body class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(196,116,42,.22),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(26,58,92,.14),transparent_35%),#FDF6EC]">
-<div id="toast" class="hidden fixed right-4 top-4 z-50 rounded-2xl bg-earth px-5 py-3 text-sm font-semibold text-cream shadow-2xl toast"></div>
-<main id="loginPage" class="min-h-screen grid lg:grid-cols-2">
-  <section class="hidden lg:flex flex-col justify-between bg-earth text-cream p-10 xl:p-14"><a href="index.html" class="inline-flex items-center gap-3 w-fit"><span class="grid h-11 w-11 place-items-center rounded-2xl bg-gold text-earth font-black">T</span><span class="font-display text-2xl font-black">Tshwaragano</span></a><div class="max-w-xl"><p class="mb-4 inline-flex rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-gold">Teacher Access</p><h1 class="font-display text-5xl xl:text-6xl font-black leading-tight">Manage learners with clarity.</h1><p class="mt-5 text-lg leading-8 text-sand/75">Record scores, track attendance, flag interventions and communicate with parents from one responsive workspace.</p></div><div class="grid grid-cols-3 gap-3 text-center"><div class="rounded-2xl bg-white/5 p-4"><b class="block text-2xl text-gold">32</b><span class="text-xs text-sand/60">Students</span></div><div class="rounded-2xl bg-white/5 p-4"><b class="block text-2xl text-gold">5</b><span class="text-xs text-sand/60">Alerts</span></div><div class="rounded-2xl bg-white/5 p-4"><b class="block text-2xl text-gold">89%</b><span class="text-xs text-sand/60">Attendance</span></div></div></section>
-  <section class="flex items-center justify-center p-5 sm:p-8"><form id="loginForm" class="glass w-full max-w-md rounded-[2rem] border border-white/60 p-6 sm:p-8 shadow-2xl" novalidate><a href="tshwaragano.html" class="mb-7 inline-flex items-center gap-3 lg:hidden"><span class="grid h-10 w-10 place-items-center rounded-2xl bg-earth text-gold font-black">T</span><span class="font-display text-2xl font-black">Tshwaragano</span></a><h2 class="text-3xl font-extrabold tracking-tight">Teacher Portal</h2><p class="mt-2 text-sm text-clay">Demo login: use any email and any password.</p><label class="mt-7 block text-sm font-bold" for="email">Teacher email</label><input id="email" type="email" required placeholder="teacher@example.com" class="mt-2 w-full rounded-2xl border border-earth/10 bg-white px-4 py-3 outline-none transition focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"><label class="mt-4 block text-sm font-bold" for="password">Password</label><input id="password" type="password" required minlength="3" placeholder="••••••••" class="mt-2 w-full rounded-2xl border border-earth/10 bg-white px-4 py-3 outline-none transition focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"><p id="loginError" class="mt-3 hidden rounded-xl bg-red-50 px-3 py-2 text-sm font-semibold text-red-700"></p><button class="mt-6 w-full rounded-2xl bg-earth px-5 py-3.5 font-bold text-cream shadow-xl transition hover:-translate-y-0.5 hover:bg-kalahari focus:outline-none focus:ring-4 focus:ring-kalahari/30">Login to Workspace</button><div class="mt-5 flex flex-wrap justify-center gap-3 text-sm"><a href="parent.html" class="font-bold text-kalahari hover:underline">Parent portal</a><span class="text-earth/30">•</span><a href="index.html" class="font-bold text-kalahari hover:underline">Back home</a></div></form></section>
-</main>
-<section id="dashboardPage" class="hidden min-h-screen"><header class="sticky top-0 z-40 border-b border-earth/10 bg-cream/90 backdrop-blur-xl"><div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6"><a href="index.html" class="flex items-center gap-3"><span class="grid h-10 w-10 place-items-center rounded-2xl bg-earth text-gold font-black">T</span><div><p class="font-display text-xl font-black leading-none">Tshwaragano</p><p class="text-xs font-semibold text-clay">Teacher Dashboard</p></div></a><div class="flex items-center gap-2"><button id="saveBtn" class="hidden sm:inline-flex rounded-xl border border-earth/10 bg-white px-4 py-2 text-sm font-bold text-earth hover:border-kalahari">Save Changes</button><button id="logoutBtn" class="rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700">Logout</button></div></div></header>
-  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:py-8">
-    <section class="rounded-[2rem] bg-earth p-6 text-cream shadow-2xl sm:p-8"><div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"><div><p class="mb-3 text-sm font-bold uppercase tracking-[.2em] text-gold">Class workspace</p><h1 class="text-3xl font-extrabold sm:text-4xl">Mathematics · Form 3A</h1><p class="mt-2 text-sand/70">Update learner records, send feedback and spot risk early.</p></div><div class="grid grid-cols-2 gap-3 sm:grid-cols-4" id="statsGrid"></div></div></section>
-    <section class="mt-6 grid gap-6 xl:grid-cols-[1.2fr_.8fr]"><div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6"><div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><h2 class="text-xl font-extrabold">Student Records</h2><input id="searchInput" placeholder="Search learner..." class="rounded-2xl border border-earth/10 px-4 py-2.5 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"></div><div class="overflow-x-auto"><table class="w-full min-w-[680px] text-left text-sm"><thead><tr class="border-b bg-cream text-xs uppercase tracking-wider text-clay"><th class="p-3">Name</th><th class="p-3">Score</th><th class="p-3">Attendance</th><th class="p-3">Status</th><th class="p-3">Action</th></tr></thead><tbody id="studentRows"></tbody></table></div></div>
-    <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6"><h2 class="text-xl font-extrabold">Update Student Record</h2><form id="recordForm" class="mt-4 grid gap-3"><select id="studentName" class="rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"></select><div class="grid grid-cols-2 gap-3"><input id="score" type="number" min="0" max="100" placeholder="Score %" class="rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"><input id="attendance" type="number" min="0" max="100" placeholder="Attendance %" class="rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"></div><textarea id="note" rows="3" placeholder="Teacher note for parent..." class="rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"></textarea><button class="rounded-2xl bg-earth px-5 py-3 font-bold text-cream hover:bg-kalahari">Update Record</button></form><div class="mt-5 rounded-2xl bg-gold/10 p-4 text-sm leading-6 text-clay"><b>Tip:</b> scores below 50% automatically mark the learner as At Risk and add an intervention alert.</div></div></section>
-    <section class="mt-6 grid gap-6 lg:grid-cols-[.8fr_1fr]"><div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6"><h2 class="text-xl font-extrabold">Intervention Alerts</h2><div id="alerts" class="mt-4 space-y-3"></div></div><div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6"><div class="mb-4 flex items-center justify-between"><h2 class="text-xl font-extrabold">Parent Communication</h2><span class="rounded-full bg-green-50 px-3 py-1 text-xs font-black text-green-700">Online</span></div><div id="chatMessages" class="max-h-72 space-y-3 overflow-y-auto rounded-2xl bg-cream p-3"></div><form id="chatForm" class="mt-3 flex flex-col gap-2 sm:flex-row"><input id="chatInput" class="min-w-0 flex-1 rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15" placeholder="Reply to parent..."><button class="rounded-2xl bg-earth px-5 py-3 font-bold text-cream hover:bg-kalahari">Send</button></form></div></section>
-  </div>
-</section>
-<script>
-const $=s=>document.querySelector(s);const toast=t=>{const el=$('#toast');el.textContent=t;el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),2400)};
-let students=[{name:'Keabetswe Rankunyana',score:45,attendance:70,note:'Math performance dropped this week.'},{name:'Thato Molefe',score:78,attendance:90,note:'Good progress.'},{name:'Kagiso Dube',score:88,attendance:95,note:'Excellent performance.'},{name:'Lesedi Moyo',score:62,attendance:84,note:'Needs homework consistency.'}];
-function status(s){return s.score<50||s.attendance<75?['At Risk','bg-red-50 text-red-700']:s.score>=85&&s.attendance>=90?['Excellent','bg-green-50 text-green-700']:['Good','bg-gold/15 text-clay']}
-function render(){const avg=Math.round(students.reduce((a,b)=>a+b.score,0)/students.length),att=Math.round(students.reduce((a,b)=>a+b.attendance,0)/students.length),risk=students.filter(s=>status(s)[0]==='At Risk').length;$('#statsGrid').innerHTML=[['Students',students.length],['Avg Score',avg+'%'],['Attendance',att+'%'],['Alerts',risk]].map(x=>`<div class="rounded-2xl bg-white/8 p-4 text-center"><b class="block text-2xl text-gold">${x[1]}</b><span class="text-xs text-sand/60">${x[0]}</span></div>`).join('');
-const q=($('#searchInput')?.value||'').toLowerCase();$('#studentRows').innerHTML=students.filter(s=>s.name.toLowerCase().includes(q)).map((s,i)=>{const st=status(s);return `<tr class="border-b last:border-0"><td class="p-3 font-bold">${s.name}<p class="mt-1 text-xs font-normal text-earth/50">${s.note}</p></td><td class="p-3 font-black">${s.score}%</td><td class="p-3">${s.attendance}%</td><td class="p-3"><span class="rounded-full px-3 py-1 text-xs font-black ${st[1]}">${st[0]}</span></td><td class="p-3"><button onclick="loadStudent('${s.name}')" class="rounded-xl bg-earth px-3 py-2 text-xs font-bold text-cream hover:bg-kalahari">Edit</button></td></tr>`}).join('');
-$('#studentName').innerHTML=students.map(s=>`<option>${s.name}</option>`).join('');$('#alerts').innerHTML=students.filter(s=>status(s)[0]==='At Risk').map(s=>`<div class="rounded-2xl border border-red-200 bg-red-50 p-4"><p class="font-extrabold text-red-800">${s.name}</p><p class="mt-1 text-sm text-red-700">Score ${s.score}% · Attendance ${s.attendance}%</p><p class="mt-2 text-xs text-red-700">${s.note}</p></div>`).join('')||'<p class="rounded-2xl bg-green-50 p-4 text-sm font-bold text-green-700">No high-risk learners right now.</p>';}
-function loadStudent(n){const s=students.find(x=>x.name===n);$('#studentName').value=s.name;$('#score').value=s.score;$('#attendance').value=s.attendance;$('#note').value=s.note;toast('Loaded '+n)} window.loadStudent=loadStudent;
-let messages=[['Parent','How is Keabetswe doing?','left'],['Teacher','She is improving slowly. I will share extra revision work.','right']];function renderChat(){$('#chatMessages').innerHTML=messages.map(m=>`<div class="flex ${m[2]==='right'?'justify-end':'justify-start'}"><div class="max-w-[85%] rounded-2xl ${m[2]==='right'?'bg-earth text-cream rounded-br-md':'bg-white text-earth rounded-bl-md'} px-4 py-3 shadow-sm"><p class="text-xs font-black opacity-70">${m[0]}</p><p class="mt-1 text-sm">${m[1]}</p></div></div>`).join('');$('#chatMessages').scrollTop=$('#chatMessages').scrollHeight}
-$('#loginForm').addEventListener('submit',e=>{e.preventDefault();const email=$('#email').value.trim(),pass=$('#password').value.trim();if(!email||!pass){$('#loginError').textContent='Please enter teacher email and password.';$('#loginError').classList.remove('hidden');return}$('#loginError').classList.add('hidden');$('#loginPage').classList.add('hidden');$('#dashboardPage').classList.remove('hidden');render();renderChat();toast('Welcome back, teacher.');});
-$('#logoutBtn').addEventListener('click',()=>{$('#dashboardPage').classList.add('hidden');$('#loginPage').classList.remove('hidden');toast('Logged out safely.')});
-$('#searchInput').addEventListener('input',render);$('#recordForm').addEventListener('submit',e=>{e.preventDefault();const s=students.find(x=>x.name===$('#studentName').value);const sc=Number($('#score').value),at=Number($('#attendance').value);if(!Number.isFinite(sc)||!Number.isFinite(at)||sc<0||sc>100||at<0||at>100){toast('Enter valid percentages from 0 to 100.');return}s.score=sc;s.attendance=at;s.note=$('#note').value.trim()||s.note;render();toast('Student record updated.');});
-$('#chatForm').addEventListener('submit',e=>{e.preventDefault();const txt=$('#chatInput').value.trim();if(!txt)return;messages.push(['Teacher',txt,'right']);$('#chatInput').value='';renderChat();setTimeout(()=>{messages.push(['Parent','Thank you, teacher. I appreciate the update.','left']);renderChat();},700)});$('#saveBtn').addEventListener('click',()=>toast('Demo changes saved locally.'));
-</script>
-</body></html>
+
+  <div id="toast" class="hidden fixed right-4 top-4 z-50 rounded-2xl bg-earth px-5 py-3 text-sm font-semibold text-cream shadow-2xl toast"></div>
+
+  <!-- LOGIN PAGE -->
+  <main id="loginPage" class="min-h-screen grid lg:grid-cols-2">
+
+    <!-- LEFT BRAND PANEL -->
+    <section class="hidden lg:flex flex-col justify-between bg-earth text-cream p-10 xl:p-14">
+
+      <a href="index.html" class="inline-flex items-center gap-3 w-fit">
+
+        <!-- LOGO PLACEHOLDER -->
+        <span class="grid h-14 w-14 place-items-center rounded-2xl bg-white border border-gold/30 shadow-md overflow-hidden">
+          <img
+            src="tshwaragano logo1.png"
+            alt="Tshwaragano Digital Platform Logo"
+            class="h-full w-full object-contain p-1"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;font-display text-2xl font-black text-earth&quot;>T</span>';"
+          />
+        </span>
+
+        <span class="font-display text-2xl font-black">Tshwaragano</span>
+      </a>
+
+      <div class="max-w-xl">
+        <p class="mb-4 inline-flex rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-gold">
+          Teacher Access
+        </p>
+
+        <h1 class="font-display text-5xl xl:text-6xl font-black leading-tight">
+          Manage learners with clarity.
+        </h1>
+
+        <p class="mt-5 text-lg leading-8 text-sand/75">
+          Record scores, track attendance, flag interventions and communicate with parents from one responsive workspace.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="rounded-2xl bg-white/5 p-4">
+          <b class="block text-2xl text-gold">32</b>
+          <span class="text-xs text-sand/60">Students</span>
+        </div>
+
+        <div class="rounded-2xl bg-white/5 p-4">
+          <b class="block text-2xl text-gold">5</b>
+          <span class="text-xs text-sand/60">Alerts</span>
+        </div>
+
+        <div class="rounded-2xl bg-white/5 p-4">
+          <b class="block text-2xl text-gold">89%</b>
+          <span class="text-xs text-sand/60">Attendance</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT LOGIN FORM -->
+    <section class="flex items-center justify-center p-5 sm:p-8">
+      <form id="loginForm" class="glass w-full max-w-md rounded-[2rem] border border-white/60 p-6 sm:p-8 shadow-2xl" novalidate>
+
+        <a href="tshwaragano.html" class="mb-7 inline-flex items-center gap-3 lg:hidden">
+
+          <!-- MOBILE LOGO PLACEHOLDER -->
+          <span class="grid h-14 w-14 place-items-center rounded-2xl bg-white border border-earth/10 shadow-md overflow-hidden">
+            <img
+              src="tshwaragano logo1.png"
+              alt="Tshwaragano Digital Platform Logo"
+              class="h-full w-full object-contain p-1"
+              onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;font-display text-2xl font-black text-earth&quot;>T</span>';"
+            />
+          </span>
+
+          <span class="font-display text-2xl font-black">Tshwaragano</span>
+        </a>
+
+        <h2 class="text-3xl font-extrabold tracking-tight">Teacher Portal</h2>
+        <p class="mt-2 text-sm text-clay">Demo login: use any email and any password.</p>
+
+        <label class="mt-7 block text-sm font-bold" for="email">Teacher email</label>
+        <input
+          id="email"
+          type="email"
+          required
+          placeholder="teacher@example.com"
+          class="mt-2 w-full rounded-2xl border border-earth/10 bg-white px-4 py-3 outline-none transition focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"
+        >
+
+        <label class="mt-4 block text-sm font-bold" for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          required
+          minlength="3"
+          placeholder="••••••••"
+          class="mt-2 w-full rounded-2xl border border-earth/10 bg-white px-4 py-3 outline-none transition focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"
+        >
+
+        <p id="loginError" class="mt-3 hidden rounded-xl bg-red-50 px-3 py-2 text-sm font-semibold text-red-700"></p>
+
+        <button class="mt-6 w-full rounded-2xl bg-earth px-5 py-3.5 font-bold text-cream shadow-xl transition hover:-translate-y-0.5 hover:bg-kalahari focus:outline-none focus:ring-4 focus:ring-kalahari/30">
+          Login to Workspace
+        </button>
+
+        <div class="mt-5 flex flex-wrap justify-center gap-3 text-sm">
+          <a href="parent.html" class="font-bold text-kalahari hover:underline">Parent portal</a>
+          <span class="text-earth/30">•</span>
+          <a href="index.html" class="font-bold text-kalahari hover:underline">Back home</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- DASHBOARD PAGE -->
+  <section id="dashboardPage" class="hidden min-h-screen">
+
+    <header class="sticky top-0 z-40 border-b border-earth/10 bg-cream/90 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
+
+        <a href="index.html" class="flex items-center gap-3">
+
+          <!-- DASHBOARD HEADER LOGO PLACEHOLDER -->
+          <span class="grid h-12 w-12 place-items-center rounded-2xl bg-white border border-earth/10 shadow-md overflow-hidden">
+            <img
+              src="tshwaragano logo1.png"
+              alt="Tshwaragano Digital Platform Logo"
+              class="h-full w-full object-contain p-1"
+              onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;font-display text-xl font-black text-earth&quot;>T</span>';"
+            />
+          </span>
+
+          <div>
+            <p class="font-display text-xl font-black leading-none">Tshwaragano</p>
+            <p class="text-xs font-semibold text-clay">Teacher Dashboard</p>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-2">
+          <button id="saveBtn" class="hidden sm:inline-flex rounded-xl border border-earth/10 bg-white px-4 py-2 text-sm font-bold text-earth hover:border-kalahari">
+            Save Changes
+          </button>
+
+          <button id="logoutBtn" class="rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700">
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:py-8">
+
+      <section class="rounded-[2rem] bg-earth p-6 text-cream shadow-2xl sm:p-8">
+        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="mb-3 text-sm font-bold uppercase tracking-[.2em] text-gold">Class workspace</p>
+            <h1 class="text-3xl font-extrabold sm:text-4xl">Mathematics · Form 3A</h1>
+            <p class="mt-2 text-sand/70">Update learner records, send feedback and spot risk early.</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 sm:grid-cols-4" id="statsGrid"></div>
+        </div>
+      </section>
+
+      <section class="mt-6 grid gap-6 xl:grid-cols-[1.2fr_.8fr]">
+
+        <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6">
+          <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h2 class="text-xl font-extrabold">Student Records</h2>
+
+            <input
+              id="searchInput"
+              placeholder="Search learner..."
+              class="rounded-2xl border border-earth/10 px-4 py-2.5 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"
+            >
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[680px] text-left text-sm">
+              <thead>
+                <tr class="border-b bg-cream text-xs uppercase tracking-wider text-clay">
+                  <th class="p-3">Name</th>
+                  <th class="p-3">Score</th>
+                  <th class="p-3">Attendance</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3">Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="studentRows"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6">
+          <h2 class="text-xl font-extrabold">Update Student Record</h2>
+
+          <form id="recordForm" class="mt-4 grid gap-3">
+            <select
+              id="studentName"
+              class="rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15">
+            </select>
+
+            <div class="grid grid-cols-2 gap-3">
+              <input
+                id="score"
+                type="number"
+                min="0"
+                max="100"
+                placeholder="Score %"
+                class="rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"
+              >
+
+              <input
+                id="attendance"
+                type="number"
+                min="0"
+                max="100"
+                placeholder="Attendance %"
+                class="rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"
+              >
+            </div>
+
+            <textarea
+              id="note"
+              rows="3"
+              placeholder="Teacher note for parent..."
+              class="rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15">
+            </textarea>
+
+            <button class="rounded-2xl bg-earth px-5 py-3 font-bold text-cream hover:bg-kalahari">
+              Update Record
+            </button>
+          </form>
+
+          <div class="mt-5 rounded-2xl bg-gold/10 p-4 text-sm leading-6 text-clay">
+            <b>Tip:</b> scores below 50% automatically mark the learner as At Risk and add an intervention alert.
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-6 grid gap-6 lg:grid-cols-[.8fr_1fr]">
+
+        <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6">
+          <h2 class="text-xl font-extrabold">Intervention Alerts</h2>
+          <div id="alerts" class="mt-4 space-y-3"></div>
+        </div>
+
+        <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6">
+          <div class="mb-4 flex items-center justify-between">
+            <h2 class="text-xl font-extrabold">Parent Communication</h2>
+            <span class="rounded-full bg-green-50 px-3 py-1 text-xs font-black text-green-700">Online</span>
+          </div>
+
+          <div id="chatMessages" class="max-h-72 space-y-3 overflow-y-auto rounded-2xl bg-cream p-3"></div>
+
+          <form id="chatForm" class="mt-3 flex flex-col gap-2 sm:flex-row">
+            <input
+              id="chatInput"
+              class="min-w-0 flex-1 rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15"
+              placeholder="Reply to parent..."
+            >
+
+            <button class="rounded-2xl bg-earth px-5 py-3 font-bold text-cream hover:bg-kalahari">
+              Send
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <script>
+    const $ = s => document.querySelector(s);
+
+    const toast = t => {
+      const el = $('#toast');
+      el.textContent = t;
+      el.classList.remove('hidden');
+
+      setTimeout(() => {
+        el.classList.add('hidden');
+      }, 2400);
+    };
+
+    let students = [
+      {
+        name: 'Keabetswe Rankunyana',
+        score: 45,
+        attendance: 70,
+        note: 'Math performance dropped this week.'
+      },
+      {
+        name: 'Thato Molefe',
+        score: 78,
+        attendance: 90,
+        note: 'Good progress.'
+      },
+      {
+        name: 'Kagiso Dube',
+        score: 88,
+        attendance: 95,
+        note: 'Excellent performance.'
+      },
+      {
+        name: 'Lesedi Moyo',
+        score: 62,
+        attendance: 84,
+        note: 'Needs homework consistency.'
+      }
+    ];
+
+    function status(s) {
+      return s.score < 50 || s.attendance < 75
+        ? ['At Risk', 'bg-red-50 text-red-700']
+        : s.score >= 85 && s.attendance >= 90
+          ? ['Excellent', 'bg-green-50 text-green-700']
+          : ['Good', 'bg-gold/15 text-clay'];
+    }
+
+    function render() {
+      const avg = Math.round(students.reduce((a, b) => a + b.score, 0) / students.length);
+      const att = Math.round(students.reduce((a, b) => a + b.attendance, 0) / students.length);
+      const risk = students.filter(s => status(s)[0] === 'At Risk').length;
+
+      $('#statsGrid').innerHTML = [
+        ['Students', students.length],
+        ['Avg Score', avg + '%'],
+        ['Attendance', att + '%'],
+        ['Alerts', risk]
+      ].map(x => `
+        <div class="rounded-2xl bg-white/8 p-4 text-center">
+          <b class="block text-2xl text-gold">${x[1]}</b>
+          <span class="text-xs text-sand/60">${x[0]}</span>
+        </div>
+      `).join('');
+
+      const q = ($('#searchInput')?.value || '').toLowerCase();
+
+      $('#studentRows').innerHTML = students
+        .filter(s => s.name.toLowerCase().includes(q))
+        .map((s) => {
+          const st = status(s);
+
+          return `
+            <tr class="border-b last:border-0">
+              <td class="p-3 font-bold">
+                ${s.name}
+                <p class="mt-1 text-xs font-normal text-earth/50">${s.note}</p>
+              </td>
+              <td class="p-3 font-black">${s.score}%</td>
+              <td class="p-3">${s.attendance}%</td>
+              <td class="p-3">
+                <span class="rounded-full px-3 py-1 text-xs font-black ${st[1]}">${st[0]}</span>
+              </td>
+              <td class="p-3">
+                <button onclick="loadStudent('${s.name}')" class="rounded-xl bg-earth px-3 py-2 text-xs font-bold text-cream hover:bg-kalahari">
+                  Edit
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+      $('#studentName').innerHTML = students
+        .map(s => `<option>${s.name}</option>`)
+        .join('');
+
+      $('#alerts').innerHTML = students
+        .filter(s => status(s)[0] === 'At Risk')
+        .map(s => `
+          <div class="rounded-2xl border border-red-200 bg-red-50 p-4">
+            <p class="font-extrabold text-red-800">${s.name}</p>
+            <p class="mt-1 text-sm text-red-700">Score ${s.score}% · Attendance ${s.attendance}%</p>
+            <p class="mt-2 text-xs text-red-700">${s.note}</p>
+          </div>
+        `).join('') || `
+          <p class="rounded-2xl bg-green-50 p-4 text-sm font-bold text-green-700">
+            No high-risk learners right now.
+          </p>
+        `;
+    }
+
+    function loadStudent(n) {
+      const s = students.find(x => x.name === n);
+
+      $('#studentName').value = s.name;
+      $('#score').value = s.score;
+      $('#attendance').value = s.attendance;
+      $('#note').value = s.note;
+
+      toast('Loaded ' + n);
+    }
+
+    window.loadStudent = loadStudent;
+
+    let messages = [
+      ['Parent', 'How is Keabetswe doing?', 'left'],
+      ['Teacher', 'She is improving slowly. I will share extra revision work.', 'right']
+    ];
+
+    function renderChat() {
+      $('#chatMessages').innerHTML = messages.map(m => `
+        <div class="flex ${m[2] === 'right' ? 'justify-end' : 'justify-start'}">
+          <div class="max-w-[85%] rounded-2xl ${m[2] === 'right' ? 'bg-earth text-cream rounded-br-md' : 'bg-white text-earth rounded-bl-md'} px-4 py-3 shadow-sm">
+            <p class="text-xs font-black opacity-70">${m[0]}</p>
+            <p class="mt-1 text-sm">${m[1]}</p>
+          </div>
+        </div>
+      `).join('');
+
+      $('#chatMessages').scrollTop = $('#chatMessages').scrollHeight;
+    }
+
+    $('#loginForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      const email = $('#email').value.trim();
+      const pass = $('#password').value.trim();
+
+      if (!email || !pass) {
+        $('#loginError').textContent = 'Please enter teacher email and password.';
+        $('#loginError').classList.remove('hidden');
+        return;
+      }
+
+      $('#loginError').classList.add('hidden');
+      $('#loginPage').classList.add('hidden');
+      $('#dashboardPage').classList.remove('hidden');
+
+      render();
+      renderChat();
+
+      toast('Welcome back, teacher.');
+    });
+
+    $('#logoutBtn').addEventListener('click', () => {
+      $('#dashboardPage').classList.add('hidden');
+      $('#loginPage').classList.remove('hidden');
+      toast('Logged out safely.');
+    });
+
+    $('#searchInput').addEventListener('input', render);
+
+    $('#recordForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      const s = students.find(x => x.name === $('#studentName').value);
+      const sc = Number($('#score').value);
+      const at = Number($('#attendance').value);
+
+      if (!Number.isFinite(sc) || !Number.isFinite(at) || sc < 0 || sc > 100 || at < 0 || at > 100) {
+        toast('Enter valid percentages from 0 to 100.');
+        return;
+      }
+
+      s.score = sc;
+      s.attendance = at;
+      s.note = $('#note').value.trim() || s.note;
+
+      render();
+      toast('Student record updated.');
+    });
+
+    $('#chatForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      const txt = $('#chatInput').value.trim();
+
+      if (!txt) return;
+
+      messages.push(['Teacher', txt, 'right']);
+      $('#chatInput').value = '';
+      renderChat();
+
+      setTimeout(() => {
+        messages.push(['Parent', 'Thank you, teacher. I appreciate the update.', 'left']);
+        renderChat();
+      }, 700);
+    });
+
+    $('#saveBtn').addEventListener('click', () => {
+      toast('Demo changes saved locally.');
+    });
+  </script>
+</body>
+</html>
