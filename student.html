@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Portal | Tshwaragano</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            earth: '#2C1A0E', kalahari: '#C4742A', gold: '#E8A93C', sand: '#F5DEB3', cream: '#FDF6EC', sky: '#1A3A5C', river: '#2E7D9A', leaf: '#2D6A4F'
+          },
+          fontFamily: { display: ['Playfair Display','serif'], body: ['DM Sans','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body{font-family:'DM Sans',sans-serif;background:#FDF6EC;color:#2C1A0E}
+    .glass{background:rgba(255,255,255,.82);backdrop-filter:blur(18px)}
+    .panel{display:none}.panel.active{display:block}
+    .nav-btn.active{background:#2C1A0E;color:#FDF6EC}
+    .toast{transform:translateY(120%);transition:.3s ease}.toast.show{transform:translateY(0)}
+  </style>
+</head>
+<body class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(196,116,42,.16),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(26,58,92,.12),transparent_35%)]">
+
+<section id="loginPage" class="min-h-screen flex items-center justify-center px-4 py-10">
+  <div class="glass w-full max-w-md rounded-3xl shadow-2xl border border-white/70 p-8 sm:p-10">
+    <a href="tshwaragano.html" class="inline-flex items-center gap-2 text-sm font-semibold text-kalahari mb-8">← Back to home</a>
+    <div class="text-center mb-8">
+      <div class="mx-auto w-16 h-16 rounded-2xl bg-earth text-gold flex items-center justify-center text-3xl shadow-lg">🎓</div>
+      <h1 class="font-display text-4xl font-black mt-4">Student Portal</h1>
+      <p class="text-sm text-earth/60 mt-2">Track grades, homework, timetable, conduct, and messages.</p>
+    </div>
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label class="text-sm font-semibold" for="email">Student email</label>
+        <input id="email" type="email" value="student@tshwaragano.co.bw" required class="mt-2 w-full rounded-xl border border-earth/15 bg-white px-4 py-3 outline-none focus:ring-4 focus:ring-kalahari/20" />
+      </div>
+      <div>
+        <label class="text-sm font-semibold" for="password">Password</label>
+        <input id="password" type="password" value="demo123" required minlength="4" class="mt-2 w-full rounded-xl border border-earth/15 bg-white px-4 py-3 outline-none focus:ring-4 focus:ring-kalahari/20" />
+      </div>
+      <button class="w-full rounded-xl bg-earth text-cream py-3.5 font-bold hover:bg-kalahari transition shadow-lg" type="submit">Login to Dashboard</button>
+      <p class="text-xs text-center text-earth/50">Demo mode: any valid email and password works.</p>
+    </form>
+  </div>
+</section>
+
+<section id="dashboardPage" class="hidden min-h-screen">
+  <header class="sticky top-0 z-40 bg-cream/90 backdrop-blur-xl border-b border-earth/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-3">
+      <a href="tshwaragano.html" class="flex items-center gap-3 min-w-0">
+        <div class="w-11 h-11 rounded-2xl bg-earth text-gold flex items-center justify-center font-black">T</div>
+        <div class="min-w-0">
+          <p class="font-display text-xl font-black leading-none truncate">Tshwaragano</p>
+          <p class="text-xs text-earth/55 truncate">Student Dashboard</p>
+        </div>
+      </a>
+      <div class="flex items-center gap-2">
+        <button id="themeBtn" class="hidden sm:inline-flex rounded-xl border border-earth/10 px-4 py-2 text-sm font-semibold hover:bg-white">Dark mode</button>
+        <button id="logoutBtn" class="rounded-xl bg-red-500 text-white px-4 py-2 text-sm font-bold hover:bg-red-600">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+    <section class="grid lg:grid-cols-[280px_1fr] gap-6">
+      <aside class="glass rounded-3xl border border-white/70 shadow-xl p-4 h-fit lg:sticky lg:top-24">
+        <div class="flex items-center gap-4 p-3 rounded-2xl bg-earth text-cream">
+          <div class="w-14 h-14 rounded-2xl bg-gold text-earth flex items-center justify-center font-black text-xl">KM</div>
+          <div>
+            <h2 class="font-bold">Keabetswe Molebatsi</h2>
+            <p class="text-xs text-sand/80">Grade 10A · Gaborone Secondary</p>
+          </div>
+        </div>
+        <nav class="grid grid-cols-2 lg:grid-cols-1 gap-2 mt-4" aria-label="Student dashboard navigation">
+          <button class="nav-btn active text-left px-4 py-3 rounded-xl font-semibold" data-panel="overview">📊 Overview</button>
+          <button class="nav-btn text-left px-4 py-3 rounded-xl font-semibold hover:bg-white/70" data-panel="grades">📚 Grades</button>
+          <button class="nav-btn text-left px-4 py-3 rounded-xl font-semibold hover:bg-white/70" data-panel="homework">📝 Homework</button>
+          <button class="nav-btn text-left px-4 py-3 rounded-xl font-semibold hover:bg-white/70" data-panel="timetable">📅 Timetable</button>
+          <button class="nav-btn text-left px-4 py-3 rounded-xl font-semibold hover:bg-white/70" data-panel="messages">💬 Messages</button>
+        </nav>
+      </aside>
+
+      <section class="space-y-6">
+        <div class="glass rounded-3xl border border-white/70 shadow-xl p-6 sm:p-8 overflow-hidden relative">
+          <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-gold/20"></div>
+          <p class="text-sm font-bold text-kalahari uppercase tracking-widest">Welcome back</p>
+          <h1 class="font-display text-3xl sm:text-5xl font-black mt-2">Your school progress, all in one place.</h1>
+          <p class="text-earth/65 mt-3 max-w-2xl">Stay on top of your marks, attendance, homework, conduct points, and teacher messages before anything becomes a problem.</p>
+        </div>
+
+        <div id="overview" class="panel active space-y-6">
+          <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            <article class="glass rounded-2xl border border-white/70 p-5 shadow"><p class="text-earth/55 text-sm">Overall Average</p><h3 class="text-4xl font-black mt-2">83%</h3><p class="text-green-600 text-sm font-semibold mt-2">▲ +4% this term</p></article>
+            <article class="glass rounded-2xl border border-white/70 p-5 shadow"><p class="text-earth/55 text-sm">Attendance</p><h3 class="text-4xl font-black mt-2">94%</h3><p class="text-earth/55 text-sm mt-2">47 / 50 days</p></article>
+            <article class="glass rounded-2xl border border-white/70 p-5 shadow"><p class="text-earth/55 text-sm">Conduct Points</p><h3 class="text-4xl font-black mt-2 text-kalahari">+18</h3><p class="text-earth/55 text-sm mt-2">Good standing</p></article>
+            <article class="glass rounded-2xl border border-white/70 p-5 shadow"><p class="text-earth/55 text-sm">Pending Tasks</p><h3 id="taskCount" class="text-4xl font-black mt-2 text-red-500">3</h3><p class="text-earth/55 text-sm mt-2">Due this week</p></article>
+          </div>
+
+          <div class="grid xl:grid-cols-2 gap-6">
+            <article class="glass rounded-3xl border border-white/70 p-6 shadow-xl">
+              <h2 class="font-display text-2xl font-black mb-5">Subject Performance</h2>
+              <div id="subjectBars" class="space-y-4"></div>
+            </article>
+            <article class="glass rounded-3xl border border-white/70 p-6 shadow-xl">
+              <h2 class="font-display text-2xl font-black mb-5">Recent Activity</h2>
+              <div class="space-y-3">
+                <div class="p-4 rounded-2xl bg-green-50 border border-green-100"><strong>Maths:</strong> Excellent class participation. <span class="text-green-700 font-bold">+5 points</span></div>
+                <div class="p-4 rounded-2xl bg-amber-50 border border-amber-100"><strong>Science:</strong> Assignment due Friday.</div>
+                <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100"><strong>English:</strong> Teacher uploaded new revision notes.</div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div id="grades" class="panel">
+          <article class="glass rounded-3xl border border-white/70 p-6 shadow-xl overflow-x-auto">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
+              <h2 class="font-display text-2xl font-black">Grade Report</h2>
+              <input id="gradeSearch" placeholder="Search subject..." class="rounded-xl border border-earth/10 px-4 py-2 outline-none focus:ring-4 focus:ring-kalahari/20">
+            </div>
+            <table class="w-full min-w-[620px] text-left">
+              <thead><tr class="border-b border-earth/10 text-earth/60"><th class="py-3">Subject</th><th>Teacher</th><th>Score</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="gradeTable"></tbody>
+            </table>
+          </article>
+        </div>
+
+        <div id="homework" class="panel">
+          <article class="glass rounded-3xl border border-white/70 p-6 shadow-xl">
+            <h2 class="font-display text-2xl font-black mb-5">Homework & Assignments</h2>
+            <div id="homeworkList" class="grid md:grid-cols-2 gap-4"></div>
+          </article>
+        </div>
+
+        <div id="timetable" class="panel">
+          <article class="glass rounded-3xl border border-white/70 p-6 shadow-xl overflow-x-auto">
+            <h2 class="font-display text-2xl font-black mb-5">Today’s Timetable</h2>
+            <table class="w-full min-w-[520px] text-left">
+              <thead><tr class="border-b border-earth/10 text-earth/60"><th class="py-3">Time</th><th>Subject</th><th>Room</th><th>Teacher</th></tr></thead>
+              <tbody id="timetableRows"></tbody>
+            </table>
+          </article>
+        </div>
+
+        <div id="messages" class="panel">
+          <article class="glass rounded-3xl border border-white/70 p-6 shadow-xl max-w-3xl">
+            <h2 class="font-display text-2xl font-black mb-5">Teacher Messages</h2>
+            <div id="chatBox" class="h-80 overflow-y-auto rounded-2xl bg-white/70 border border-earth/10 p-4 space-y-3"></div>
+            <form id="chatForm" class="flex flex-col sm:flex-row gap-3 mt-4">
+              <input id="messageInput" placeholder="Type your reply..." class="flex-1 rounded-xl border border-earth/10 px-4 py-3 outline-none focus:ring-4 focus:ring-kalahari/20">
+              <button class="rounded-xl bg-earth text-cream px-6 py-3 font-bold hover:bg-kalahari transition">Send</button>
+            </form>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+</section>
+
+<div id="toast" class="toast fixed bottom-5 left-1/2 -translate-x-1/2 bg-earth text-cream px-5 py-3 rounded-2xl shadow-2xl font-semibold z-50"></div>
+
+<script>
+const subjects=[['Mathematics','Mme Setshedi',84,'Strong'],['English','Mr Dube',91,'Excellent'],['Science','Rra Molefe',76,'Good'],['History','Ms Kgosi',88,'Excellent'],['Business Studies','Mr Phiri',68,'Needs Focus'],['Setswana','Mme Kago',82,'Strong']];
+const homework=[{title:'Maths Algebra Practice',due:'Friday, 29 May',status:'Pending',level:'High'},{title:'English Essay Draft',due:'Thursday, 28 May',status:'Submitted',level:'Done'},{title:'Science Lab Report',due:'Monday, 1 June',status:'Pending',level:'Medium'},{title:'History Source Analysis',due:'Wednesday, 3 June',status:'Not Started',level:'Low'}];
+const timetable=[['07:30 - 08:20','Mathematics','B12','Mme Setshedi'],['08:25 - 09:15','English','A04','Mr Dube'],['09:30 - 10:20','Science','Lab 2','Rra Molefe'],['10:25 - 11:15','Business Studies','C09','Mr Phiri'],['12:00 - 12:50','Setswana','A11','Mme Kago']];
+const messages=[{from:'Teacher',text:'Dumela Keabetswe, please remember to submit your Science lab report.',side:'left'},{from:'You',text:'Thank you Sir, I will submit it before Monday.',side:'right'}];
+const $=id=>document.getElementById(id);
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function renderBars(){ $('subjectBars').innerHTML=subjects.map(([s,,score])=>`<div><div class="flex justify-between text-sm font-semibold mb-2"><span>${s}</span><span>${score}%</span></div><div class="h-3 bg-earth/10 rounded-full overflow-hidden"><div class="h-full rounded-full ${score<70?'bg-red-500':score<80?'bg-kalahari':'bg-leaf'}" style="width:${score}%"></div></div></div>`).join('') }
+function renderGrades(filter=''){ $('gradeTable').innerHTML=subjects.filter(x=>x[0].toLowerCase().includes(filter.toLowerCase())).map(([s,t,score,status])=>`<tr class="border-b border-earth/5"><td class="py-4 font-bold">${s}</td><td>${t}</td><td><span class="font-black ${score<70?'text-red-500':'text-leaf'}">${score}%</span></td><td>${status}</td><td><button onclick="toast('Revision plan opened for ${s}')" class="px-3 py-2 rounded-xl bg-earth text-cream text-sm font-bold">Revise</button></td></tr>`).join('') }
+function renderHomework(){ $('homeworkList').innerHTML=homework.map((h,i)=>`<div class="rounded-2xl bg-white/75 border border-earth/10 p-5"><div class="flex items-start justify-between gap-3"><div><h3 class="font-bold text-lg">${h.title}</h3><p class="text-sm text-earth/60 mt-1">Due: ${h.due}</p></div><span class="text-xs font-bold rounded-full px-3 py-1 ${h.status==='Submitted'?'bg-green-100 text-green-700':'bg-amber-100 text-amber-700'}">${h.status}</span></div><button onclick="markDone(${i})" class="mt-4 w-full rounded-xl border border-earth/10 py-2 font-bold hover:bg-earth hover:text-cream transition">Mark as done</button></div>`).join(''); $('taskCount').textContent=homework.filter(h=>h.status!=='Submitted').length }
+function markDone(i){homework[i].status='Submitted';renderHomework();toast('Assignment marked as submitted')}
+function renderTimetable(){ $('timetableRows').innerHTML=timetable.map(r=>`<tr class="border-b border-earth/5"><td class="py-4 font-bold">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('') }
+function renderChat(){ $('chatBox').innerHTML=messages.map(m=>`<div class="flex ${m.side==='right'?'justify-end':''}"><div class="max-w-[85%] rounded-2xl px-4 py-3 ${m.side==='right'?'bg-earth text-cream':'bg-sand/70 text-earth'}"><p class="text-xs font-bold opacity-70 mb-1">${m.from}</p><p>${m.text}</p></div></div>`).join(''); $('chatBox').scrollTop=$('chatBox').scrollHeight }
+function switchPanel(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.panel===id))}
+document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>switchPanel(b.dataset.panel)));
+$('loginForm').addEventListener('submit',e=>{e.preventDefault();$('loginPage').classList.add('hidden');$('dashboardPage').classList.remove('hidden');toast('Welcome to your Student Portal')});
+$('logoutBtn').addEventListener('click',()=>{$('dashboardPage').classList.add('hidden');$('loginPage').classList.remove('hidden');toast('Logged out safely')});
+$('gradeSearch').addEventListener('input',e=>renderGrades(e.target.value));
+$('chatForm').addEventListener('submit',e=>{e.preventDefault();const val=$('messageInput').value.trim();if(!val)return;messages.push({from:'You',text:val,side:'right'});$('messageInput').value='';renderChat();setTimeout(()=>{messages.push({from:'Teacher',text:'Received. I will check and respond soon.',side:'left'});renderChat()},700)});
+$('themeBtn').addEventListener('click',()=>{document.body.classList.toggle('bg-gray-950');document.body.classList.toggle('text-cream');toast('Theme changed')});
+renderBars();renderGrades();renderHomework();renderTimetable();renderChat();
+</script>
+</body>
+</html>
