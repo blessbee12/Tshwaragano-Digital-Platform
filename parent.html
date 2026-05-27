@@ -1,162 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <title>Parent Portal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Tailwind -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tshwaragano | Parent Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config={theme:{extend:{colors:{earth:'#2C1A0E',clay:'#8B4513',kalahari:'#C4742A',gold:'#E8A93C',sand:'#F5DEB3',cream:'#FDF6EC',sky:'#1A3A5C',river:'#2E7D9A',leaf:'#2D6A4F'},fontFamily:{body:['DM Sans','sans-serif'],display:['Playfair Display','serif']}}}}
+  </script>
   <style>
-    body { font-family: 'Poppins', sans-serif; }
+    *{box-sizing:border-box} body{font-family:'DM Sans',sans-serif;background:#FDF6EC;color:#2C1A0E}.glass{background:rgba(255,255,255,.82);backdrop-filter:blur(18px)}.card{transition:transform .25s,box-shadow .25s}.card:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(44,26,14,.12)}.toast{animation:slide .35s ease both}@keyframes slide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
+<body class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(232,169,60,.25),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(46,125,154,.16),transparent_35%),#FDF6EC]">
+  <div id="toast" class="hidden fixed right-4 top-4 z-50 rounded-2xl bg-earth px-5 py-3 text-sm font-semibold text-cream shadow-2xl toast"></div>
 
-<body class="bg-gradient-to-br from-gray-100 to-gray-200">
+  <main id="loginPage" class="min-h-screen grid lg:grid-cols-2">
+    <section class="hidden lg:flex flex-col justify-between bg-earth text-cream p-10 xl:p-14">
+      <a href="index.html" class="inline-flex items-center gap-3 w-fit"><span class="grid h-11 w-11 place-items-center rounded-2xl bg-gold text-earth font-black">T</span><span class="font-display text-2xl font-black">Tshwaragano</span></a>
+      <div class="max-w-xl">
+        <p class="mb-4 inline-flex rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-gold">Parent Access</p>
+        <h1 class="font-display text-5xl xl:text-6xl font-black leading-tight">Stay close to your child’s progress.</h1>
+        <p class="mt-5 text-lg leading-8 text-sand/75">View marks, attendance, behaviour updates, assignments and teacher messages in one simple dashboard.</p>
+      </div>
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="rounded-2xl bg-white/5 p-4"><b class="block text-2xl text-gold">84%</b><span class="text-xs text-sand/60">Average</span></div>
+        <div class="rounded-2xl bg-white/5 p-4"><b class="block text-2xl text-gold">92%</b><span class="text-xs text-sand/60">Attendance</span></div>
+        <div class="rounded-2xl bg-white/5 p-4"><b class="block text-2xl text-gold">18</b><span class="text-xs text-sand/60">Conduct pts</span></div>
+      </div>
+    </section>
 
-<!-- ================= LOGIN ================= -->
-<section id="loginPage" class="min-h-screen flex items-center justify-center">
+    <section class="flex items-center justify-center p-5 sm:p-8">
+      <form id="loginForm" class="glass w-full max-w-md rounded-[2rem] border border-white/60 p-6 sm:p-8 shadow-2xl" novalidate>
+        <a href="index.html" class="mb-7 inline-flex items-center gap-3 lg:hidden"><span class="grid h-10 w-10 place-items-center rounded-2xl bg-earth text-gold font-black">T</span><span class="font-display text-2xl font-black">Tshwaragano</span></a>
+        <h2 class="text-3xl font-extrabold tracking-tight">Parent Portal</h2>
+        <p class="mt-2 text-sm text-clay">Demo login: use any email and any password.</p>
+        <label class="mt-7 block text-sm font-bold" for="email">Email address</label>
+        <input id="email" type="email" required placeholder="parent@example.com" class="mt-2 w-full rounded-2xl border border-earth/10 bg-white px-4 py-3 outline-none transition focus:border-kalahari focus:ring-4 focus:ring-kalahari/15">
+        <label class="mt-4 block text-sm font-bold" for="password">Password</label>
+        <input id="password" type="password" required minlength="3" placeholder="••••••••" class="mt-2 w-full rounded-2xl border border-earth/10 bg-white px-4 py-3 outline-none transition focus:border-kalahari focus:ring-4 focus:ring-kalahari/15">
+        <p id="loginError" class="mt-3 hidden rounded-xl bg-red-50 px-3 py-2 text-sm font-semibold text-red-700"></p>
+        <button class="mt-6 w-full rounded-2xl bg-earth px-5 py-3.5 font-bold text-cream shadow-xl transition hover:-translate-y-0.5 hover:bg-kalahari focus:outline-none focus:ring-4 focus:ring-kalahari/30">Login to Dashboard</button>
+        <div class="mt-5 flex flex-wrap justify-center gap-3 text-sm"><a href="teacher.html" class="font-bold text-kalahari hover:underline">Teacher portal</a><span class="text-earth/30">•</span><a href="tshwaragano.html" class="font-bold text-kalahari hover:underline">Back home</a></div>
+      </form>
+    </section>
+  </main>
 
-  <div class="bg-white/80 backdrop-blur-lg p-10 rounded-3xl shadow-xl w-full max-w-md">
+  <section id="dashboardPage" class="hidden min-h-screen">
+    <header class="sticky top-0 z-40 border-b border-earth/10 bg-cream/90 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
+        <a href="tshwaragano.html" class="flex items-center gap-3"><span class="grid h-10 w-10 place-items-center rounded-2xl bg-earth text-gold font-black">T</span><div><p class="font-display text-xl font-black leading-none">Tshwaragano</p><p class="text-xs font-semibold text-clay">Parent Dashboard</p></div></a>
+        <div class="flex items-center gap-2"><button id="exportBtn" class="hidden sm:inline-flex rounded-xl border border-earth/10 bg-white px-4 py-2 text-sm font-bold text-earth hover:border-kalahari">Export Report</button><button id="logoutBtn" class="rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700">Logout</button></div>
+      </div>
+    </header>
 
-    <h2 class="text-3xl font-bold text-center mb-6">👨‍👩‍👧 Parent Portal</h2>
-
-    <input type="email" placeholder="Email"
-      class="w-full mb-3 p-3 border rounded-xl focus:ring-2 focus:ring-black">
-
-    <input type="password" placeholder="Password"
-      class="w-full mb-5 p-3 border rounded-xl focus:ring-2 focus:ring-black">
-
-    <button onclick="enterDashboard()"
-      class="w-full bg-black text-white py-3 rounded-xl font-semibold hover:scale-105 transition">
-      Login
-    </button>
-
-    <p class="text-center text-sm text-gray-500 mt-4">Demo Mode</p>
-
-  </div>
-</section>
-
-
-<!-- ================= DASHBOARD ================= -->
-<section id="dashboardPage" class="hidden min-h-screen p-6">
-
-  <!-- Top Bar -->
-  <div class="flex justify-between items-center mb-8">
-    <h1 class="text-3xl font-bold">📊 Parent Dashboard</h1>
-
-    <button onclick="logout()"
-      class="bg-red-500 text-white px-5 py-2 rounded-xl hover:scale-105 transition">
-      Logout
-    </button>
-  </div>
-
-  <!-- Student Profile -->
-  <div class="bg-white p-6 rounded-2xl shadow mb-8 flex items-center gap-5">
-    <div class="w-16 h-16 bg-black text-white flex items-center justify-center rounded-full text-xl">
-      K
-    </div>
-
-    <div>
-      <h2 class="text-xl font-bold">Keabetswe Rankunyana</h2>
-      <p class="text-gray-500">Form 3 • Gaborone Secondary</p>
-    </div>
-  </div>
-
-  <!-- Stats -->
-  <div class="grid md:grid-cols-3 gap-6 mb-8">
-
-    <div class="bg-white p-5 rounded-2xl shadow hover:scale-105 transition">
-      <p class="text-gray-500">Average Score</p>
-      <h2 class="text-3xl font-bold text-black">84%</h2>
-    </div>
-
-    <div class="bg-white p-5 rounded-2xl shadow hover:scale-105 transition">
-      <p class="text-gray-500">Attendance</p>
-      <h2 class="text-3xl font-bold text-black">92%</h2>
-    </div>
-
-    <div class="bg-white p-5 rounded-2xl shadow hover:scale-105 transition">
-      <p class="text-gray-500">Behavior</p>
-      <h2 class="text-3xl font-bold text-green-500">Excellent</h2>
-    </div>
-
-  </div>
-
-  <!-- Alert -->
-  <div class="bg-red-100 text-red-700 p-4 rounded-xl mb-8">
-    ⚠️ Math performance dropped this week. Teacher intervention recommended.
-  </div>
-
-  <!-- Subjects -->
-  <div class="bg-white p-6 rounded-2xl shadow mb-8">
-    <h3 class="text-xl font-bold mb-4">📚 Subject Performance</h3>
-
-    <div class="space-y-3">
-
-      <div>
-        <p>Math</p>
-        <div class="w-full bg-gray-200 h-3 rounded">
-          <div class="bg-red-500 h-3 rounded" style="width:45%"></div>
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:py-8">
+      <section class="grid gap-5 lg:grid-cols-[1.3fr_.7fr]">
+        <div class="rounded-[2rem] bg-earth p-6 text-cream shadow-2xl sm:p-8">
+          <p class="mb-3 text-sm font-bold uppercase tracking-[.2em] text-gold">Student profile</p>
+          <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-center gap-4"><div class="grid h-20 w-20 place-items-center rounded-3xl bg-gold text-3xl font-black text-earth">K</div><div><h1 class="text-3xl font-extrabold">Keabetswe Rankunyana</h1><p class="mt-1 text-sand/70">Form 3 • Gaborone Secondary • Term 2</p></div></div>
+            <div class="rounded-3xl bg-white/8 p-4"><p class="text-sm text-sand/60">Overall status</p><p class="mt-1 text-2xl font-black text-gold">Improving</p></div>
+          </div>
         </div>
-      </div>
+        <div class="rounded-[2rem] border border-red-200 bg-red-50 p-6 shadow-xl"><p class="text-sm font-black uppercase tracking-[.18em] text-red-700">Priority alert</p><h2 class="mt-3 text-xl font-extrabold text-red-800">Math needs support</h2><p class="mt-2 text-sm leading-6 text-red-700">Math performance is below target. Please review assignments and message the teacher if support is needed.</p></div>
+      </section>
 
-      <div>
-        <p>English</p>
-        <div class="w-full bg-gray-200 h-3 rounded">
-          <div class="bg-green-500 h-3 rounded" style="width:78%"></div>
+      <section class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4" id="statsGrid"></section>
+
+      <section class="mt-6 grid gap-6 lg:grid-cols-[1fr_.8fr]">
+        <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6">
+          <div class="mb-5 flex items-center justify-between gap-3"><h2 class="text-xl font-extrabold">Subject Performance</h2><span class="rounded-full bg-gold/15 px-3 py-1 text-xs font-black text-clay">Live demo</span></div>
+          <div id="subjects" class="space-y-4"></div>
         </div>
-      </div>
-
-      <div>
-        <p>Science</p>
-        <div class="w-full bg-gray-200 h-3 rounded">
-          <div class="bg-blue-500 h-3 rounded" style="width:88%"></div>
+        <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6">
+          <h2 class="text-xl font-extrabold">Attendance This Week</h2>
+          <div id="attendanceDays" class="mt-5 grid grid-cols-5 gap-2"></div>
+          <div class="mt-6 rounded-2xl bg-leaf/10 p-4 text-sm leading-6 text-leaf"><b>Good record:</b> 5/5 days attended this week. Keep the routine strong.</div>
         </div>
-      </div>
+      </section>
 
+      <section class="mt-6 grid gap-6 lg:grid-cols-[.85fr_1fr]">
+        <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6"><h2 class="text-xl font-extrabold">Assignments</h2><div id="assignments" class="mt-4 space-y-3"></div></div>
+        <div class="rounded-[2rem] bg-white p-5 shadow-xl sm:p-6">
+          <div class="mb-4 flex items-center justify-between"><h2 class="text-xl font-extrabold">Chat with Teacher</h2><span class="rounded-full bg-green-50 px-3 py-1 text-xs font-black text-green-700">Online</span></div>
+          <div id="chatMessages" class="max-h-72 space-y-3 overflow-y-auto rounded-2xl bg-cream p-3"></div>
+          <form id="chatForm" class="mt-3 flex flex-col gap-2 sm:flex-row"><input id="chatInput" class="min-w-0 flex-1 rounded-2xl border border-earth/10 px-4 py-3 outline-none focus:border-kalahari focus:ring-4 focus:ring-kalahari/15" placeholder="Type a message to the teacher..."><button class="rounded-2xl bg-earth px-5 py-3 font-bold text-cream hover:bg-kalahari">Send</button></form>
+        </div>
+      </section>
     </div>
-  </div>
+  </section>
 
-  <!-- Chat -->
-  <div class="bg-white p-6 rounded-2xl shadow max-w-xl">
-    <h3 class="text-xl font-bold mb-4">💬 Chat with Teacher</h3>
-
-    <div class="space-y-2 mb-4">
-      <div class="bg-gray-200 p-2 rounded">
-        <strong>Teacher:</strong> Keabetswe is improving 👍
-      </div>
-
-      <div class="bg-black text-white p-2 rounded text-right">
-        You: Thank you!
-      </div>
-    </div>
-
-    <div class="flex gap-2">
-      <input class="border p-2 w-full rounded-xl" placeholder="Type message...">
-      <button class="bg-black text-white px-4 rounded-xl">Send</button>
-    </div>
-  </div>
-
-</section>
-
-
-<!-- ================= SCRIPT ================= -->
 <script>
-  function enterDashboard() {
-    document.getElementById("loginPage").classList.add("hidden");
-    document.getElementById("dashboardPage").classList.remove("hidden");
-  }
-
-  function logout() {
-    document.getElementById("dashboardPage").classList.add("hidden");
-    document.getElementById("loginPage").classList.remove("hidden");
-  }
+const $=s=>document.querySelector(s);const toast=t=>{const el=$('#toast');el.textContent=t;el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),2400)};
+const subjects=[['Mathematics',45,'Needs support','bg-red-500'],['English',78,'Good','bg-green-500'],['Science',88,'Excellent','bg-sky-500'],['Setswana',82,'Strong','bg-gold'],['Social Studies',74,'Good','bg-kalahari']];
+const stats=[['Average Score','84%','+4% from last month'],['Attendance','92%','46 of 50 days'],['Behaviour','Excellent','18 positive points'],['Unread Alerts','2','Action needed']];
+const assignments=[['Mathematics revision','Due Friday','High priority'],['Science practical report','Due Monday','In progress'],['English essay','Submitted','Done']];
+function render(){ $('#statsGrid').innerHTML=stats.map(s=>`<article class="card rounded-[1.5rem] bg-white p-5 shadow-xl"><p class="text-sm font-bold text-clay">${s[0]}</p><h3 class="mt-2 text-3xl font-black">${s[1]}</h3><p class="mt-2 text-sm text-earth/55">${s[2]}</p></article>`).join('');
+$('#subjects').innerHTML=subjects.map(s=>`<div><div class="mb-1 flex justify-between text-sm"><span class="font-bold">${s[0]}</span><span class="font-black">${s[1]}%</span></div><div class="h-3 overflow-hidden rounded-full bg-earth/10"><div class="h-full rounded-full ${s[3]}" style="width:${s[1]}%"></div></div><p class="mt-1 text-xs font-semibold text-clay">${s[2]}</p></div>`).join('');
+$('#attendanceDays').innerHTML=['Mon','Tue','Wed','Thu','Fri'].map(d=>`<div class="rounded-2xl bg-green-50 p-4 text-center"><p class="font-black text-green-700">✓</p><p class="mt-1 text-xs font-bold text-green-800">${d}</p></div>`).join('');
+$('#assignments').innerHTML=assignments.map(a=>`<div class="rounded-2xl border border-earth/10 p-4"><div class="flex items-start justify-between gap-3"><div><p class="font-extrabold">${a[0]}</p><p class="mt-1 text-sm text-earth/55">${a[1]}</p></div><span class="rounded-full bg-kalahari/10 px-3 py-1 text-xs font-black text-kalahari">${a[2]}</span></div></div>`).join('');}
+let messages=[['Teacher','Keabetswe is improving in class participation 👍','left'],['You','Thank you. I will support her at home.','right']];
+function renderChat(){ $('#chatMessages').innerHTML=messages.map(m=>`<div class="flex ${m[2]==='right'?'justify-end':'justify-start'}"><div class="max-w-[85%] rounded-2xl ${m[2]==='right'?'bg-earth text-cream rounded-br-md':'bg-white text-earth rounded-bl-md'} px-4 py-3 shadow-sm"><p class="text-xs font-black opacity-70">${m[0]}</p><p class="mt-1 text-sm">${m[1]}</p></div></div>`).join(''); $('#chatMessages').scrollTop=$('#chatMessages').scrollHeight;}
+$('#loginForm').addEventListener('submit',e=>{e.preventDefault();const email=$('#email').value.trim(),pass=$('#password').value.trim();if(!email||!pass){$('#loginError').textContent='Please enter email and password.';$('#loginError').classList.remove('hidden');return} $('#loginError').classList.add('hidden');$('#loginPage').classList.add('hidden');$('#dashboardPage').classList.remove('hidden');render();renderChat();toast('Welcome back, parent.');});
+$('#logoutBtn').addEventListener('click',()=>{ $('#dashboardPage').classList.add('hidden');$('#loginPage').classList.remove('hidden');toast('Logged out safely.');});
+$('#chatForm').addEventListener('submit',e=>{e.preventDefault();const txt=$('#chatInput').value.trim();if(!txt)return;messages.push(['You',txt,'right']);$('#chatInput').value='';renderChat();setTimeout(()=>{messages.push(['Teacher','Noted. I will keep you updated after the next assessment.','left']);renderChat();},700)});
+$('#exportBtn').addEventListener('click',()=>toast('Demo export ready: parent report generated.'));
 </script>
-
 </body>
 </html>
