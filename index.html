@@ -82,7 +82,7 @@ tailwind.config = {
 <!-- NAV -->
 <nav class="fixed top-0 inset-x-0 z-50 bg-cream/90 backdrop-blur-xl border-b border-kalahari/20">
   <div class="max-w-7xl mx-auto px-5 h-[68px] flex items-center justify-between">
-    <a href="#home" class="flex items-center gap-3">
+    <a href="index.html" class="flex items-center gap-3">
       <div class="w-9 h-9 bg-earth rounded-xl flex items-center justify-center text-gold font-bold">✦</div>
       <span class="font-display text-[1.4rem] font-black text-earth tracking-tight">Tshwara<span class="text-kalahari">gano</span></span>
     </a>
@@ -92,6 +92,7 @@ tailwind.config = {
       <li><a href="#roles"    class="nav-link px-4 py-2 text-sm font-medium text-earth">Who It's For</a></li>
       <li><a href="#conduct"  class="nav-link px-4 py-2 text-sm font-medium text-earth">Conduct</a></li>
       <li><a href="#context"  class="nav-link px-4 py-2 text-sm font-medium text-earth">Context</a></li>
+      <li><a href="student.html" class="nav-link px-4 py-2 text-sm font-medium text-earth">Student Portal</a></li>
       <li><a href="parent.html" class="nav-link px-4 py-2 text-sm font-medium text-earth">Parent Portal</a></li>
       <li><a href="teacher.html" class="nav-link px-4 py-2 text-sm font-medium text-earth">Teacher Portal</a></li>
       <li><a href="#register" class="ml-3 px-5 py-2 bg-earth text-cream text-sm font-semibold rounded-xl hover:bg-kalahari transition-colors">Get Started</a></li>
@@ -109,6 +110,11 @@ tailwind.config = {
     <a href="#roles"    onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Who It's For</a>
     <a href="#conduct"  onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Conduct</a>
     <a href="#context"  onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Context</a>
+    <a href="parent.html" onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Parent Portal</a>
+    <a href="teacher.html" onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Teacher Portal</a>
+    <a href="student.html" onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Student Portal</a>
+    <a href="parent.html" onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Parent Portal</a>
+    <a href="teacher.html" onclick="document.getElementById('mob-menu').classList.remove('open')" class="block py-2.5 text-sm font-medium text-earth border-b border-kalahari/10">Teacher Portal</a>
     <a href="#register" onclick="document.getElementById('mob-menu').classList.remove('open')" class="block mt-2 px-5 py-2.5 bg-earth text-cream text-sm font-semibold rounded-xl text-center">Get Started</a>
   </div>
 </nav>
@@ -650,8 +656,8 @@ tailwind.config = {
     <h2 class="font-display text-4xl lg:text-5xl font-black text-cream leading-tight mb-5">Let's Build Better Schools<br><span class="text-gold">Together.</span></h2>
     <p class="text-sand/70 text-[1.02rem] leading-relaxed mb-10 max-w-xl mx-auto">Tshwaragano means "togetherness" in Setswana. Because education works best when families and teachers move as one — informed, aligned, and united around every child's success.</p>
     <div class="flex flex-wrap gap-4 justify-center">
-      <a href="#register" class="px-8 py-4 bg-gold text-earth font-bold text-base rounded-xl hover:bg-cream transition-all hover:-translate-y-0.5 hover:shadow-xl">Register Your School</a>
-      <a href="#features" class="px-8 py-4 border-2 border-sand/30 text-cream font-medium text-base rounded-xl hover:border-gold hover:text-gold transition-all">Download for Parents</a>
+      <a href="teacher.html" class="px-8 py-4 bg-gold text-earth font-bold text-base rounded-xl hover:bg-cream transition-all hover:-translate-y-0.5 hover:shadow-xl">Open Teacher Portal</a>
+      <a href="parent.html" class="px-8 py-4 border-2 border-sand/30 text-cream font-medium text-base rounded-xl hover:border-gold hover:text-gold transition-all">Open Parent Portal</a>
     </div>
   </div>
 </section>
@@ -697,7 +703,7 @@ tailwind.config = {
       </div>
     </div>
     <div class="border-t border-kalahari/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <span class="text-sand/30 text-xs">© 2025 Tshwaragano · All rights reserved</span>
+      <span class="text-sand/30 text-xs">© 2026 Tshwaragano · All rights reserved</span>
       <span class="text-sand/40 text-xs">🇧🇼 Proudly built for Botswana</span>
     </div>
   </div>
@@ -728,7 +734,7 @@ const grades=[
   {sub:'Setswana',score:82,color:'#E8A93C'},
 ];
 const gr=document.getElementById('grade-rows');
-grades.forEach(g=>{
+if(gr) grades.forEach(g=>{
   gr.innerHTML+=`<div class="bg-earth/40 rounded-xl px-3 py-2.5 flex items-center gap-3">
     <div class="text-sand/70 text-[10px] w-20 flex-shrink-0">${g.sub}</div>
     <div class="flex-1 bg-earth/60 rounded-full h-1.5"><div class="h-1.5 rounded-full" style="width:${g.score}%;background:${g.color}"></div></div>
@@ -748,7 +754,7 @@ const cc=document.getElementById('conduct-rows');
 const cols={good:'border-green-600/20 bg-green-900/20',warn:'border-amber-600/20 bg-amber-900/10',bad:'border-red-600/20 bg-red-900/10'};
 const dc={good:'bg-green-400',warn:'bg-amber-400',bad:'bg-red-400'};
 const pc={good:'text-green-400',warn:'text-amber-400',bad:'text-red-400'};
-conducts.forEach(c=>{
+if(cc) conducts.forEach(c=>{
   cc.innerHTML+=`<div class="flex items-center gap-2 border rounded-xl px-3 py-2 ${cols[c.type]}">
     <span class="w-2 h-2 rounded-full flex-shrink-0 ${dc[c.type]}"></span>
     <div class="flex-1"><div class="text-cream text-[10px] font-semibold">${c.text}</div><div class="text-sand/40 text-[9px]">${c.sub}</div></div>
